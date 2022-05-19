@@ -1,0 +1,62 @@
+package com.sogeti.automation.framework.basetest;
+
+import com.sogeti.automation.framework.driver.GlobalDriver;
+import com.sogeti.automation.framework.driver.TestListener;
+import com.sogeti.automation.framework.utils.ExcelReader;
+import com.sogeti.automation.framework.utils.Logging;
+import com.sogeti.automation.framework.utils.PropertyReader;
+import org.apache.logging.log4j.ThreadContext;
+import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
+
+import java.io.File;
+import java.lang.reflect.Method;
+
+@Listeners({TestListener.class})
+public class TestClass {
+    protected ExcelReader data;
+    protected GlobalDriver gDriver;
+    protected WebDriver driver;
+    protected String testEnvironment;
+    protected String testURL;
+    protected String sheetName;
+    protected Logging log = new Logging(this.getClass().getName());
+
+    public TestClass() throws Exception {
+        PropertyReader prop = new PropertyReader();
+        prop.valueMap("Configs" + File.separator + System.getProperty("envName") + ".properties");
+        testEnvironment = PropertyReader.getFieldValue("defaultEnvironment");
+    }
+
+    @BeforeMethod
+    public void beforeMethod(Method method) {
+        Thread thread = new Thread();
+        thread.setName(method.getName());
+        long th = thread.getId();
+        ThreadContext.put("TestCasename", thread.getName());
+        ThreadContext.put("ThreadID", "ID-" + th);
+        this.log.startTestCase(thread.getName());
+    }
+
+    @AfterMethod
+    public void afterMethod(ITestResult result, Method method) {
+        Thread thread = new Thread();
+        thread.setName(method.getName());
+        this.log.info(result.toString());
+        this.log.endTestCase(thread.getName());
+    }
+
+    @BeforeClass
+    public void beforeClass() {
+        Thread thread = new Thread();
+        thread.setName(this.getClass().getSimpleName());
+        long th = thread.getId();
+        ThreadContext.put("TestCaseName", thread.getName());
+        ThreadContext.put("ThreadID", "ID-" + th);
+        this.log.info("BEFORE CLASS: " + thread.getName());
+    }
+}
