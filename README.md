@@ -4,8 +4,13 @@
     <br/>
 </p>
 
-![Project Under Construction](.blob/images/work-in-progress.png)
-<h2 align="center">This framework is under construction. Please check back again later.</h2>
+
+<h2 align="center">
+<img align="center" src=".blob/images/work-in-progress.png" alt="Project Under Construction" style="width:100px;"/>
+</h2>
+<h2 align="center">
+This framework is under construction. Please check back again later.
+</h2>
 
 ## Contributing
 
