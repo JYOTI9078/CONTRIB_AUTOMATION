@@ -1,0 +1,29 @@
+{
+  // * Workspace recommended extensions
+
+  // * List of extensions which should be recommended for users of this workspace.
+  "recommendations": [
+    {
+      "pluginName": "Cucumber for Java",
+      "pluginUrl": "https://plugins.jetbrains.com/plugin/7212-cucumber-for-java"
+    },
+    {
+      "pluginName": "Gherkin",
+      "pluginUrl": "https://plugins.jetbrains.com/plugin/9164-gherkin"
+    },
+    {
+      "pluginName": "Azure Toolkit for IntelliJ",
+      "pluginUrl": "https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij"
+    },
+    {
+      "pluginName": "SonarLint",
+      "pluginUrl": "https://plugins.jetbrains.com/plugin/7973-sonarlint"
+    },
+    {
+      "pluginName": "Json Parser",
+      "pluginUrl": "https://plugins.jetbrains.com/plugin/10650-json-parser"
+    }
+  ],
+  // * List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+  "unwantedRecommendations": []
+}
