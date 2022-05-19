@@ -75,5 +75,11 @@
             <version>22.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-java-annotations</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
     </dependencies>
 </project>
