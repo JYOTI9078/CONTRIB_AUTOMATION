@@ -12,6 +12,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <log4j2.version>2.17.1</log4j2.version>
+        <selenium.version>4.1.1</selenium.version>
         <testng.version>7.5</testng.version>
         <cucumber.version>7.2.3</cucumber.version>
     </properties>
@@ -19,6 +20,18 @@
     <name>DIA BDD 2.0</name>
 
     <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.0.3</version>
+        </dependency>
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -60,6 +73,12 @@
             <groupId>io.cucumber</groupId>
             <artifactId>gherkin</artifactId>
             <version>22.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-java-annotations</artifactId>
+            <version>1.5.4</version>
         </dependency>
 
     </dependencies>
