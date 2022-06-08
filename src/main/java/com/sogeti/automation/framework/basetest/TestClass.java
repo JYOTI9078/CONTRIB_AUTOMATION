@@ -1,5 +1,7 @@
 package com.sogeti.automation.framework.basetest;
 
+import com.sogeti.automation.framework.constants.AppConstants;
+import com.sogeti.automation.framework.constants.FrameworkConstants;
 import com.sogeti.automation.framework.driver.GlobalDriver;
 import com.sogeti.automation.framework.driver.TestListener;
 import com.sogeti.automation.framework.utils.ExcelReader;
@@ -18,18 +20,32 @@ import java.lang.reflect.Method;
 
 @Listeners({TestListener.class})
 public class TestClass {
-    protected ExcelReader data;
+//    protected ExcelReader data;
     protected GlobalDriver gDriver;
     protected WebDriver driver;
     protected String testEnvironment;
     protected String testURL;
-    protected String sheetName;
+//    protected String sheetName;
     protected Logging log = new Logging(this.getClass().getName());
 
     public TestClass() throws Exception {
         PropertyReader prop = new PropertyReader();
         prop.valueMap("Configs" + File.separator + System.getProperty("envName") + ".properties");
-        testEnvironment = PropertyReader.getFieldValue("defaultEnvironment");
+        testEnvironment = PropertyReader.getFieldValue("DefaultEnvironment");
+    }
+
+    public WebDriver getDriver() {
+        return this.driver;
+    }
+
+    public WebDriver setupEnvironment(String browser) {
+        this.testURL = AppConstants.UI_BASE_URL;
+        gDriver = new GlobalDriver();
+        driver = gDriver.init(browser);
+//        driver.manage().timeouts().getImplicitWaitTimeout().plusSeconds(FrameworkConstants.LargeWait);
+        driver.get(testURL);
+
+        return driver;
     }
 
     @BeforeMethod

@@ -69,8 +69,8 @@ public class Screenshot {
         String xmlTestResult = xmlTest.getAllParameters().toString();
         String url = this._driver.getCurrentUrl();
         String gridParam = suite.getParameter("Sel_Grid");
-        String defaultBrowser = PropertyReader.getFieldValue("defaultBrowser");
-        String defaultEnv = PropertyReader.getFieldValue("defaultEnvironment");
+        String testBrowser = PropertyReader.getFieldValue("TestBrowser");
+        String defaultEnv = PropertyReader.getFieldValue("DefaultEnvironment");
 
         if (gridParam != null) {
             if (StringUtils.equalsIgnoreCase(xmlTestResult, "chrome")) {
@@ -110,7 +110,7 @@ public class Screenshot {
             }
 
         } else {
-            if (defaultBrowser.contains("chrome")) {
+            if (testBrowser.contains("chrome")) {
                 if (StringUtils.containsIgnoreCase(defaultEnv, "qa")) {
                     this.takeScreenshot(screenshotPathChromeQA);
                 } else if (StringUtils.containsIgnoreCase(defaultEnv, "Test1")) {
@@ -118,7 +118,7 @@ public class Screenshot {
                 }
             }
 
-            if (defaultBrowser.contains("firefox")) {
+            if (testBrowser.contains("firefox")) {
                 if (StringUtils.containsIgnoreCase(defaultEnv, "qa")) {
                     this.takeScreenshot(screenshotPathFFQA);
                 } else if (StringUtils.containsIgnoreCase(defaultEnv, "Test1")) {
@@ -126,7 +126,7 @@ public class Screenshot {
                 }
             }
 
-            if (defaultBrowser.contains("edge")) {
+            if (testBrowser.contains("edge")) {
                 if (StringUtils.containsIgnoreCase(defaultEnv, "qa")) {
                     this.takeScreenshot(screenshotPathEdgeQA);
                 } else if (StringUtils.containsIgnoreCase(defaultEnv, "Test1")) {
@@ -134,7 +134,7 @@ public class Screenshot {
                 }
             }
 
-            if (defaultBrowser.contains("ie")) {
+            if (testBrowser.contains("ie")) {
                 if (StringUtils.containsIgnoreCase(defaultEnv, "qa")) {
                     this.takeScreenshot(screenshotPathIEQA);
                 } else if (StringUtils.containsIgnoreCase(defaultEnv, "Test1")) {
