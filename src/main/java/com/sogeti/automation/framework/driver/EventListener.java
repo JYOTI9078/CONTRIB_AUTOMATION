@@ -125,15 +125,19 @@ public class EventListener extends AbstractWebDriverEventListener {
         String ex = throwable.getClass().toString().trim().substring(6);
         this.log.error(ex);
 
-        if (PropertyReader.getFieldValue("ScreenshotEnable").equalsIgnoreCase("true")) {
-            this.ss = new Screenshot(driver);
+        try {
+            if (PropertyReader.getFieldValue("ScreenshotEnable").equalsIgnoreCase("true")) {
+                this.ss = new Screenshot(driver);
 
-            try {
-                this.ss.setPathTakeScreenshot(testResult);
-            } catch (IOException var6) {
-                this.log.error("Unable to take screenshot.");
-                var6.printStackTrace();
+                try {
+                    this.ss.setPathTakeScreenshot(testResult);
+                } catch (IOException var6) {
+                    this.log.error("Unable to take screenshot.");
+                    var6.printStackTrace();
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
