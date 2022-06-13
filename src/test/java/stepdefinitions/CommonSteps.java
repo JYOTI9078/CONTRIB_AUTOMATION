@@ -13,7 +13,6 @@ public class CommonSteps extends TestClass {
     PageClass pageClass;
 
     public CommonSteps(TestContext context) throws Exception {
-//        super();
         this.testContext = context;
         pageClass = testContext.getPageObjectManager().getCommonPage();
         ThreadContext.pop();

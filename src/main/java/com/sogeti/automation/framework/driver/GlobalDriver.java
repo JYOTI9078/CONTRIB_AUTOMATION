@@ -106,8 +106,6 @@ public class GlobalDriver {
         options.addArguments("start-maximized");
         options.addArguments("--use-fake-ui-for-media-stream=1");
 
-//        log.info(String.valueOf(prefs));
-
         return options;
     }
 
@@ -129,7 +127,6 @@ public class GlobalDriver {
         options.setProfile(profile);
         options.setAcceptInsecureCerts(true);
 
-//        log.info(String.valueOf(options));
         return options;
     }
 
@@ -150,8 +147,6 @@ public class GlobalDriver {
         options.addArguments("--disable-extensions");
         options.addArguments("start-maximized");
         options.addArguments("--use-fake-ui-for-media-stream=1");
-
-//        log.info(String.valueOf(prefs));
 
         return options;
     }

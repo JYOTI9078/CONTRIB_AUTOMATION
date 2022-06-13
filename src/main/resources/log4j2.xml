@@ -30,8 +30,6 @@
     <Loggers>
 
         <Logger name="com.sogeti.automation" additivity="true" level="all">
-<!--            <AppenderRef ref="LogToFile" />-->
-<!--            <AppenderRef ref="LogToFile"  />-->
             <AppenderRef ref="LogToFile" />
             <AppenderRef ref="LogToConsole"  />
         </Logger>

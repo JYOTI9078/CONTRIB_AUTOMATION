@@ -32,7 +32,6 @@ public class TestClass {
         PropertyReader prop = new PropertyReader();
         String envName = System.getProperty("envName");
         prop.valueMap("Configs" + File.separator + envName + ".properties");
-//        log.info("Reading execution parameters from " + envName + ".properties");
         ThreadContext.pop();
         ThreadContext.push(envName + ".properties");
         testEnvironment = PropertyReader.getFieldValue("TestEnvironment");
@@ -46,7 +45,6 @@ public class TestClass {
         this.testURL = AppConstants.UI_BASE_URL;
         gDriver = new GlobalDriver();
         driver = gDriver.init(browser);
-//        driver.manage().timeouts().getImplicitWaitTimeout().plusSeconds(FrameworkConstants.LargeWait);
         driver.get(testURL);
 
         return driver;

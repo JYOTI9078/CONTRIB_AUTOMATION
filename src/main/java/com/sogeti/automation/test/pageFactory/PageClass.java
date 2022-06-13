@@ -9,7 +9,6 @@ public class PageClass extends WebUtils {
 
     public PageClass(WebDriver driver) {
         super(driver);
-//        wait = new WebDriverWait(driver, FrameworkConstants.MediumWait);
         PageFactory.initElements(driver, this);
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
