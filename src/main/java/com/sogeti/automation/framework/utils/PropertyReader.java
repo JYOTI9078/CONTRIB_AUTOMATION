@@ -17,18 +17,16 @@ public class PropertyReader {
     }
 
     public static String getFieldValue(String fieldName) {
-        log.info("Field Name Received is: " + fieldName);
         String fieldValue = valueMap.getProperty(fieldName);
-        log.info("Field Name Value received from Config file is: " + fieldValue);
+        log.info("Received parameter '" + fieldName + "' = " + fieldValue);
         if (fieldValue == null) {
-            log.error("INCORRECT PARAMETER (" + fieldName + ") WAS SUPPLIED FOR RETRIEVAL FROM CONFIG");
+            log.error("INCORRECT PARAMETER '" + fieldName + "' WAS SUPPLIED FOR RETRIEVAL FROM CONFIG");
             return "false";
         } else {return fieldValue;}
     }
 
     public static void setFieldValue(String fieldName, String fieldValue) {
-        log.info("Field Name Received is: " + fieldName);
         valueMap.setProperty(fieldName, fieldValue);
-        log.info("Value set for Field Name " + fieldName + " in Config file is: " + fieldValue);
+        log.info("Set parameter '" + fieldName + "' = " + fieldValue);
     }
 }

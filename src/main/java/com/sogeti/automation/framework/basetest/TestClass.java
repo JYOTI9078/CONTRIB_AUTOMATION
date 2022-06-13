@@ -30,8 +30,12 @@ public class TestClass {
 
     public TestClass() throws Exception {
         PropertyReader prop = new PropertyReader();
-        prop.valueMap("Configs" + File.separator + System.getProperty("envName") + ".properties");
-        testEnvironment = PropertyReader.getFieldValue("DefaultEnvironment");
+        String envName = System.getProperty("envName");
+        prop.valueMap("Configs" + File.separator + envName + ".properties");
+//        log.info("Reading execution parameters from " + envName + ".properties");
+        ThreadContext.pop();
+        ThreadContext.push(envName + ".properties");
+        testEnvironment = PropertyReader.getFieldValue("TestEnvironment");
     }
 
     public WebDriver getDriver() {
@@ -53,7 +57,7 @@ public class TestClass {
         Thread thread = new Thread();
         thread.setName(method.getName());
         long th = thread.getId();
-        ThreadContext.put("TestCasename", thread.getName());
+        ThreadContext.put("TestCase name ", thread.getName());
         ThreadContext.put("ThreadID", "ID-" + th);
         this.log.startTestCase(thread.getName());
     }
