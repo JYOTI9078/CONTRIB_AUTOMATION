@@ -20,17 +20,22 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         this.log.error(result.toString());
-        if (PropertyReader.getFieldValue("ScreenshotEnable").equalsIgnoreCase("true")) {
-            WebDriver driver = this.findWebDriverByReflection(result);
-            if (driver != null) {
-                try {
-                    this.initSS(driver).setPathTakeScreenshot(result);
-                } catch (IOException ie) {
-                    ie.printStackTrace();
+        try {
+            if (PropertyReader.getFieldValue("ScreenshotEnable").equalsIgnoreCase("true")) {
+                WebDriver driver = this.findWebDriverByReflection(result);
+                if (driver != null) {
+                    try {
+                        this.initSS(driver).setPathTakeScreenshot(result);
+                    } catch (IOException ie) {
+                        ie.printStackTrace();
+                    }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
     public WebDriver findWebDriverByReflection(ITestResult result) {
         WebDriver driver = null;
         Class<?> c = result.getInstance().getClass();
@@ -71,15 +76,19 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
         this.log.warn(result.toString());
-        if (PropertyReader.getFieldValue("ScreenshotEnable").equalsIgnoreCase("true")) {
-            WebDriver driver = this.findWebDriverByReflection(result);
-            if (driver != null) {
-                try {
-                    this.initSS(driver).setPathTakeScreenshot(result);
-                } catch (IOException ie) {
-                    ie.printStackTrace();
+        try {
+            if (PropertyReader.getFieldValue("ScreenshotEnable").equalsIgnoreCase("true")) {
+                WebDriver driver = this.findWebDriverByReflection(result);
+                if (driver != null) {
+                    try {
+                        this.initSS(driver).setPathTakeScreenshot(result);
+                    } catch (IOException ie) {
+                        ie.printStackTrace();
+                    }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

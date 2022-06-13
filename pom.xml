@@ -139,7 +139,7 @@
                             <outputDirectory>${project.build.directory}</outputDirectory>
                             <inputDirectory>${project.build.directory}</inputDirectory>
                             <jsonFiles>
-                                <param>**.cucumber.json</param>
+                                <param>**/cucumber.json</param>
                             </jsonFiles>
                             <classificationFiles>
                                 <param>**/classifications/*.properties</param>
@@ -160,7 +160,7 @@
                 <version>2.17</version>
             </plugin>
 
-           <!-- <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.3.2</version>
