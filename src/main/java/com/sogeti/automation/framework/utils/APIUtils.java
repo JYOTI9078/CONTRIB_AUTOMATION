@@ -57,15 +57,15 @@ public class APIUtils {
                 .when();
     }
 
-    public Response getAPIResponse(String url, Map<String, Object> queryParam) {
+    public Response getAPIResponse(String url, Map<String, Object> queryParams) {
         Response response = null;
 
         log.info("Executing GET API call...");
         RequestSpecification request = this.headerSetup();
         RequestSpecification[] when = {request};
         try {
-            if (queryParam != null)
-                queryParam.forEach((key, value) -> when[0].queryParam(key, value));
+            if (queryParams != null)
+                queryParams.forEach((key, value) -> when[0].queryParam(key, value));
 
             response = when[0].get(url);
             response.then().extract().response();
