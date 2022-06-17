@@ -1,5 +1,6 @@
 package com.sogeti.automation.framework.driver;
 
+import com.sogeti.automation.framework.constants.AppConstants;
 import com.sogeti.automation.framework.constants.FrameworkConstants;
 import com.sogeti.automation.framework.utils.Logging;
 import com.sogeti.automation.framework.utils.PropertyReader;
@@ -15,6 +16,8 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.grid.Main;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.events.WebDriverListener;
 
@@ -27,8 +30,10 @@ public class GlobalDriver {
     private String browserName;
     private String localBrowser;
     private String _headless = null;
+    private String executionServer = null;
     private WebDriverListener _driver = null;
     private WebDriver _ldriver = null;
+    private RemoteWebDriver _rmdriver = null;
     private Logging log = new Logging(GlobalDriver.class.getName());
     private String defaultDownloadPath = null;
 
@@ -37,7 +42,8 @@ public class GlobalDriver {
             _headless = System.getProperty("headlessMode");
             if (_headless == "true")
                 log.info("Running tests in headless mode.");
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
+        }
     }
 
     public String setDownloadPath() {
@@ -55,20 +61,41 @@ public class GlobalDriver {
             localBrowser = browser;
         }
 
+        executionServer = PropertyReader.getFieldValue("ExecutionServer");
+
         ThreadContext.pop();
+        ThreadContext.push(executionServer.toUpperCase());
         ThreadContext.push(localBrowser.toUpperCase());
 
         if (localBrowser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().clearResolutionCache().setup();
-            _ldriver = new ChromeDriver(setChromeOptions());
+
+            if (executionServer.equalsIgnoreCase("remote")) {
+                Main.main(new String[]{"standalone", "--port", AppConstants.GRIP_HUB_PORT});
+                _ldriver = WebDriverManager.chromedriver().remoteAddress(AppConstants.GRID_HUB_URL).create();
+            } else {
+                _ldriver = new ChromeDriver(setChromeOptions());
+            }
         }
         else if (localBrowser.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().clearResolutionCache().setup();
-            _ldriver = new FirefoxDriver(setFirefoxOptions());
+
+            if (executionServer.equalsIgnoreCase("remote")) {
+                Main.main(new String[]{"standalone", "--port", AppConstants.GRIP_HUB_PORT});
+                _ldriver = WebDriverManager.firefoxdriver().remoteAddress(AppConstants.GRID_HUB_URL).create();
+            } else {
+                _ldriver = new FirefoxDriver(setFirefoxOptions());
+            }
         }
         else if (localBrowser.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().clearResolutionCache().setup();
-            _ldriver = new EdgeDriver(setEdgeOptions());
+
+            if (executionServer.equalsIgnoreCase("remote")) {
+                Main.main(new String[]{"standalone", "--port", AppConstants.GRIP_HUB_PORT});
+                _ldriver = WebDriverManager.edgedriver().remoteAddress(AppConstants.GRID_HUB_URL).create();
+            } else {
+                _ldriver = new EdgeDriver(setEdgeOptions());
+            }
         }
 
         WebDriverListener listener = new WebDriverListener() {
