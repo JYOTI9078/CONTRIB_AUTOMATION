@@ -12,7 +12,7 @@ Use your best judgment and feel free to propose changes to anything in this repo
 
 ## Recommended setup for contributing
 
-<!-- TODO: ADD ITEMS TO LIST BELOW REQUIRED FOR JAVA -->
+<!-- ADD ITEMS REQUIRED FOR JAVA IN THE LIST BELOW  -->
 
 - Install [Git][git] and clone this repository
 - Install [Java 11][java-11]
