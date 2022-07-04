@@ -33,7 +33,11 @@
         <li><a href="#allure-reports">Allure Reports</a></li>
       </ul>
     </li>
-    <li><a href="#further-reading">Further Reading</a></li>
+    <li><a href="#further-reading">Further Reading</a>
+    <ul>
+        <li><a href="#cucumber-frameworks">Know more about Cucumber Frameworks</a> </li>
+    </ul>
+    </li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a> </li>
     <li><a href="#contact">Contact</a></li>
@@ -43,7 +47,9 @@
 
 ## About the project
 
-This is a kickstarter framework for web & api automation built on Java and Cucumber. The framework has BDD at its core as it allows the user to write tests in plain English using Gherkin.
+This is a kickstarter framework for web & api automation built on Java and Cucumber. The framework has BDD at its core
+as it allows the user to write tests in plain English using Gherkin.
+
 ```
 Scenario Outline: Verify the login functionality
     Given user has opened the homepage in browser
@@ -57,8 +63,10 @@ Scenario Outline: Verify the login functionality
 ## Getting Started
 
 ### Folder Structure
+
 The framework uses the following folder structure for various script development and framework enhancement modules.
 Please refer the structure to understand how the packages and files are organized.
+
 ```
 pom.xml                             # For managing maven dependencies, build management and commandline arguments for runtime 
 input-data                          # All the test-data files created by testers should be put here    
@@ -95,7 +103,9 @@ Contributing.md
 ```
 
 The folders that need to be maintained
+
 - By automation testers
+
 ```
 pom.xml
 input-data/testdata.xlsx
@@ -106,6 +116,7 @@ src/main/java/pageFactory
 ```
 
 - By COE developers
+
 ```
 pom.xml
 src/main/java/basetest
@@ -116,22 +127,29 @@ src/test/java/runner/TestRunner.java
 ```
 
 ## Framework Installation & Setup
+
 ### Pre-requisites
+
 - Install [Java 1.8][java-1.8]
 - Install [Maven][maven]
 - Set Java and Maven in the [classpath][classpath]
 - Install [Git][git] and clone this repository
 - Install [IntelliJ Idea][intellij] (preferred) or any other compatible IDE
-- Install all recommended [IntelliJ plugins][intellij-plugins]. Install the corresponding plugins if you're using any other IDE.
+- Install all recommended [IntelliJ plugins][intellij-plugins]. Install the corresponding plugins if you're using any
+  other IDE.
 
 ### Setup
-- Open the [qa.properties][qa-properties] file in src/test/resources/Configs folder and update the configuration details such as: 
-<br/> Execution Server 
-<br/> Grid details 
-<br/> Test browser 
-<br/> Application Base URL
-- Open [pom.xml](pom.xml) and navigate to the plugin `org.apache.maven.plugins` under the `<build>` section. Update the name of your properties file in the `envName` variable.
-<br/> For instance, if your properties file name is qa.properties, then set the value of `envName` to _qa_.
+
+- Open the [qa.properties][qa-properties] file in src/test/resources/Configs folder and update the configuration details
+  such as:
+  <br/> Execution Server
+  <br/> Grid details
+  <br/> Test browser
+  <br/> Application Base URL
+- Open [pom.xml](pom.xml) and navigate to the plugin `org.apache.maven.plugins` under the `<build>` section. Update the
+  name of your properties file in the `envName` variable.
+  <br/> For instance, if your properties file name is qa.properties, then set the value of `envName` to _qa_.
+
 ```
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -140,9 +158,12 @@ src/test/java/runner/TestRunner.java
         <systemPropertyVariables>
             <envName>qa</envName>
 ```
-- If you wish to execute the test cases in any other environment such as dev or staging, then clone the qa.properties file, rename it appropriately, and update all the values corresponding to your new environment.
-Correspondingly, set the value of `envName` in pom.xml to the same name.
+
+- If you wish to execute the test cases in any other environment such as dev or staging, then clone the qa.properties
+  file, rename it appropriately, and update all the values corresponding to your new environment.
+  Correspondingly, set the value of `envName` in pom.xml to the same name.
 - For running your tests in **Headless Mode**, set the value of `healessMode` to _true_.
+
 ```
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -155,8 +176,16 @@ Correspondingly, set the value of `envName` in pom.xml to the same name.
 
 ### Writing your first test scenario
 
+Once the framework installation and setup is complete, you are now ready to start writing your test scripts.
+
+- First create a new feature file in src/test/resources/Features folder. Right-click on the Features folder and create a
+  new file. Give it an appropriate name and make sure the file name ends with _.feature_. IntelliJ will automatically
+  detect it as a cucumber feature file (given that you have installed all the plugins correctly).
+-
+
 ## Further Reading
-- [Cucumber Frameworks][cucumber-frameworks]
+
+- Know more about [Cucumber Frameworks][cucumber-frameworks]
 - Use of [Page Object Manager][page-object-manager] in a BDD framework
 - Know more about [Gherkin][gherkin]
 - Writing [Step Definitions][step-definitions]
@@ -167,45 +196,48 @@ Correspondingly, set the value of `envName` in pom.xml to the same name.
 - How to configure Cucumber HTML Report in [Jenkins][cucumber-report-jenkins]
 
 ## Roadmap
+
 - [x] Base framework
-  - [x] Environment management
-  - [x] Test input management
-  - [ ] Parallel execution
-  - [x] Cucumber HTML report integration
-  - [ ] Serenity report integration
+    - [x] Environment management
+    - [x] Test input management
+    - [ ] Parallel execution
+    - [x] Cucumber HTML report integration
+    - [ ] Serenity report integration
 - [x] Web Automation
-  - [x] Web driver management
-  - [x] Local execution
-  - [x] Grid execution
-  - [x] Multi-browser support
-  - [ ] Browserstack/Saucelabs integration
+    - [x] Web driver management
+    - [x] Local execution
+    - [x] Grid execution
+    - [x] Multi-browser support
+    - [ ] Browserstack/Saucelabs integration
 - [x] API Automation
-  - [ ] API authentication support
+    - [ ] API authentication support
 - [ ] Mobile Automation
-  - [ ] Android - Browsers
-  - [ ] Android - App
-  - [ ] Android - Emulators
-  - [ ] iOS - Browsers
-  - [ ] iOS - App
-  - [ ] iOS - Emulators
+    - [ ] Android - Browsers
+    - [ ] Android - App
+    - [ ] Android - Emulators
+    - [ ] iOS - Browsers
+    - [ ] iOS - App
+    - [ ] iOS - Emulators
 - [ ] Desktop app Automation
 - [ ] CQA analytics extraction
 - [ ] Analytics management
 - [ ] Automated manual efforts estimator
 - [ ] Applitools integration
 - [ ] Add commonly used selenium operations into keywords
-  - [ ] Dropdown management
-  - [ ] List traversal and searching
-  - [ ] List comparison
-  - [ ] Random selection from dropdown
-  - [ ] Random selection from checkboxes
-
+    - [ ] Dropdown management
+    - [ ] List traversal and searching
+    - [ ] List comparison
+    - [ ] Random selection from dropdown
+    - [ ] Random selection from checkboxes
 
 ## Contributing
+
 To contribute to this repository, please see the [contribution guidelines](CONTRIBUTING.md).
 
-### Contact
-For further information, inquiries and support, please reach out to QE&T Automation CoE - [DL IN Sogeti Test Automation COE](sogetitestautomationcoe.in@capgemini.com).
+## Contact
+
+For further information, inquiries and support, please reach out to QE&T Automation CoE
+- [DL IN Sogeti Test Automation COE](sogetitestautomationcoe.in@capgemini.com).
 
 
 <!-- reference urls -->
