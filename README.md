@@ -43,7 +43,7 @@
 
 ## About the project
 
-This is a kickstarter framework for web & api automation built on Java and Cucumber. The framework has BDD at its core
+This is a multipurpose kickstarter framework built on Java and Cucumber. The framework has BDD at its core
 as it allows the user to write tests in plain English using Gherkin.
 
 ```
@@ -177,7 +177,7 @@ Once the framework installation and setup is complete, you are now ready to star
 - First create a new feature file in _src/test/resources/Features_ folder. Right-click on the Features folder and create a
   new file. Give it an appropriate name and make sure the file name ends with _.feature_. IntelliJ will automatically
   detect it as a cucumber feature file (given that you have installed all the plugins correctly).
-- Write your test scenarios in this feature file. Refer [Further Reding](#further-reading) to know more about writing test scenarios using Gherkin.
+- Write your test scenarios in this feature file. Refer [Further Reading](#further-reading) to know more about writing test scenarios using Gherkin.
 - Then create a new Java class in _src/test/java/stepdefinitions_.
 
 ## Further Reading
