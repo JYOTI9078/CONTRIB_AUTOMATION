@@ -46,11 +46,56 @@
 
 ## About the project
 
-<h2 align="center">
-    <img align="center" src=".blob/images/work-in-progress.png" alt="Project Under Construction" style="width:100px;"/>
-    <br/>
-    This framework is under construction. Please check back again later.
-</h2>
+This is a kickstarter framework for web & api automation built on Java and Cucumber. The framework has BDD at its core as it allows the user to write tests in plain English using Gherkin.
+```
+Scenario Outline: Verify the login functionality
+    Given user has opened the homepage in browser
+    When user enters the <username> and <password>
+    Then user should be successfully logged in
+    Example:
+       | username   | password  |
+       | user1      | pwd123    |
+```
+
+## Getting Started
+
+### Folder Structure
+The framework uses the following folder structure for various script development and framework enhancement modules.
+Please refer the structure to understand how the packages and files are organized.
+```
+pom.xml                             # For managing maven dependencies, build management and commandline arguments for runtime 
+input-data                          # All the test-data files created by testers should be put here    
+src
+└───main
+│   └───java                    
+│   │   └───basetest           ┐
+│   │   └───constants          ├    # Framework packages which are maintained by the CoE team
+│   │   └───driver             ┘
+│   │   └───pageFactory             # Add all your page classes in this package
+│   │   │   └───PageClass           # Default page class which MUST BE extended by every page-object class in the test project
+│   │   │   └───PageObjectManager   # For creating and managing objects of every page class.
+│   │   └───utils                   # Various utility libraries which can be used by both framework developers and testers
+│   └───resources
+│       └───log4j2.xml
+└───test                     
+    └───java
+    │   └───runner                  
+    │   │   └───TestRunner          # Main Runner class for this cucumber framework. Used for running tests locally
+    │   └───stepdefinitions         # Add all your step-definition classes here
+    │       └───CommonSteps         # A step-definition class for performing common actions such before and after test tasks etc.
+    └───resources
+        └───Configs                 # All the project configurations are maintained here. Create as many required for each environment of your project
+        │   └───qa.properties       
+        │   └───dev.properties      
+        └───Features                # All feature files consisting of test scenarios are kept in this folder. Create as many feature files as required.
+logs                                # Metric and execution logs displayed here
+target                              # Execution results will be shown under this folder
+└───cucumber-html-reports           # HTML reports will be created under this folder
+    └───overview.html               # Look for this file to open and view the execution reports. Same should be configured in CI-CD pipeline.
+README.md
+Contributing.md
+
+```
 
 ## Contributing
 
