@@ -33,11 +33,7 @@
         <li><a href="#allure-reports">Allure Reports</a></li>
       </ul>
     </li>
-    <li><a href="#further-reading">Further Reading</a>
-    <ul>
-        <li><a href="#cucumber-frameworks">Know more about Cucumber Frameworks</a> </li>
-    </ul>
-    </li>
+    <li><a href="#further-reading">Further Reading</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a> </li>
     <li><a href="#contact">Contact</a></li>
@@ -178,16 +174,18 @@ src/test/java/runner/TestRunner.java
 
 Once the framework installation and setup is complete, you are now ready to start writing your test scripts.
 
-- First create a new feature file in src/test/resources/Features folder. Right-click on the Features folder and create a
+- First create a new feature file in _src/test/resources/Features_ folder. Right-click on the Features folder and create a
   new file. Give it an appropriate name and make sure the file name ends with _.feature_. IntelliJ will automatically
   detect it as a cucumber feature file (given that you have installed all the plugins correctly).
--
+- Write your test scenarios in this feature file. Refer [Further Reding](#further-reading) to know more about writing test scenarios using Gherkin.
+- Then create a new Java class in _src/test/java/stepdefinitions_.
 
 ## Further Reading
 
 - Know more about [Cucumber Frameworks][cucumber-frameworks]
 - Use of [Page Object Manager][page-object-manager] in a BDD framework
 - Know more about [Gherkin][gherkin]
+- How to write [Gherkin test scenarios][gherkin-test-scenarios]
 - Writing [Step Definitions][step-definitions]
 - Know more about [Web Driver Manager][webdrivermanager]
 - Why should you run your tests in [Headless Mode][headless-mode]?
@@ -252,6 +250,7 @@ For further information, inquiries and support, please reach out to QE&T Automat
 [cucumber-frameworks]: https://github.com/RameshGhk/Cucumber_Test_Automation_Framework
 [page-object-manager]: https://www.toolsqa.com/selenium-cucumber-framework/page-object-manager/
 [gherkin]: https://cucumber.io/docs/gherkin/reference/
+[gherkin-test-scenarios]: https://cucumber.io/docs/guides/10-minute-tutorial/#write-a-scenario
 [step-definitions]: https://cucumber.io/docs/gherkin/step-organization/
 [parallel-execution]: https://cucumber.io/docs/guides/parallel-execution/
 [cucumber-reporting]: https://github.com/damianszczepanik/cucumber-reporting
