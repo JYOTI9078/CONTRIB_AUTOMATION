@@ -39,6 +39,7 @@
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a> </li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -151,6 +152,9 @@ src/test/java/runner/TestRunner.java
 ## Contributing
 
 To contribute to this repository, please see the [contribution guidelines](CONTRIBUTING.md).
+
+### Contact
+For further information, inquiries and support, please reach out to QE&T Automation CoE - [DL IN Sogeti Test Automation COE](sogetitestautomationcoe.in@capgemini.com)
 
 
 <!-- reference urls -->
