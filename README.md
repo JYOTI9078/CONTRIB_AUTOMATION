@@ -33,11 +33,7 @@
         <li><a href="#allure-reports">Allure Reports</a></li>
       </ul>
     </li>
-    <li><a href="#further-reading">Further Reading</a>
-    <ul>
-        <li><a href="#robot-framework-cheatsheets">Robot Framework Cheatsheets</a></li>
-      </ul>
-    </li>
+    <li><a href="#further-reading">Further Reading</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a> </li>
     <li><a href="#contact">Contact</a></li>
@@ -188,7 +184,7 @@ src/test/java/runner/TestRunner.java
 - [ ] Add commonly used selenium operations into keywords
     - [ ] Dropdown management
     - [ ] List traversal and searching
-    - [ ] List comparision
+    - [ ] List comparison
     - [ ] Random selection from dropdown
     - [ ] Random selection from checkboxes
 
