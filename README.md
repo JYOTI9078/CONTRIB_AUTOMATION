@@ -141,6 +141,17 @@ src/test/java/runner/TestRunner.java
             <envName>qa</envName>
 ```
 - If you wish to execute the test cases in any other environment such as dev or staging, then clone the qa.properties file, rename it appropriately, and update all the values corresponding to your new environment.
+Correspondingly, set the value of `envName` in pom.xml to the same name.
+- For running your tests in **Headless Mode**, set the value of `healessMode` to _true_.
+```
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    ...
+    <configuration>
+        <systemPropertyVariables>
+            ...
+            <headlessMode>true</headlessMode>
+```
 
 ### Writing your first test scenario
 
@@ -150,6 +161,7 @@ src/test/java/runner/TestRunner.java
 - Know more about [Gherkin][gherkin]
 - Writing [Step Definitions][step-definitions]
 - Know more about [Web Driver Manager][webdrivermanager]
+- Why should you run your tests in [Headless Mode][headless-mode]?
 - [Parallel execution][parallel-execution] using Cucumber
 - Know more about [Cucumber HTML Reports][cucumber-reporting]
 - How to configure Cucumber HTML Report in [Jenkins][cucumber-report-jenkins]
@@ -182,15 +194,14 @@ src/test/java/runner/TestRunner.java
 - [ ] Automated manual efforts estimator
 - [ ] Applitools integration
 - [ ] Add commonly used selenium operations into keywords
-    - [ ] Dropdown management
-    - [ ] List traversal and searching
-    - [ ] List comparison
-    - [ ] Random selection from dropdown
-    - [ ] Random selection from checkboxes
+  - [ ] Dropdown management
+  - [ ] List traversal and searching
+  - [ ] List comparison
+  - [ ] Random selection from dropdown
+  - [ ] Random selection from checkboxes
 
 
 ## Contributing
-
 To contribute to this repository, please see the [contribution guidelines](CONTRIBUTING.md).
 
 ### Contact
@@ -214,3 +225,4 @@ For further information, inquiries and support, please reach out to QE&T Automat
 [cucumber-reporting]: https://github.com/damianszczepanik/cucumber-reporting
 [cucumber-report-jenkins]: https://github.com/jenkinsci/cucumber-reports-plugin/wiki/Detailed-Configuration
 [webdrivermanager]: https://bonigarcia.dev/webdrivermanager/
+[headless-mode]: https://smartbear.com/blog/selenium-tests-headless/
