@@ -148,6 +148,38 @@ src/test/java/runner/TestRunner.java
 
 ### Writing your first test scenario
 
+## Roadmap
+- [x] Base framework
+  - [x] Environment management
+  - [x] Test input management
+  - [ ] Parallel execution
+  - [x] Cucumber HTML report integration
+  - [ ] Serenity report integration
+- [x] Web Automation
+  - [x] Web driver management
+  - [x] Multi-browser support
+  - [ ] Browserstack/Saucelabs integration
+- [x] API Automation
+  - [ ] API authentication support
+- [ ] Mobile Automation
+  - [ ] Android - Browsers
+  - [ ] Android - App
+  - [ ] Android - Emulators
+  - [ ] iOS - Browsers
+  - [ ] iOS - App
+  - [ ] iOS - Emulators
+- [ ] Desktop app Automation
+- [ ] CQA analytics extraction
+- [ ] Analytics management
+- [ ] Automated manual efforts estimator
+- [ ] Applitools integration
+- [ ] Add commonly used selenium operations into keywords
+    - [ ] Dropdown management
+    - [ ] List traversal and searching
+    - [ ] List comparision
+    - [ ] Random selection from dropdown
+    - [ ] Random selection from checkboxes
+
 
 ## Contributing
 
