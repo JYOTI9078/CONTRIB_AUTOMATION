@@ -15,7 +15,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#folder-structure">Folder Structure</a></li>
-        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#pre-requisites">Pre-requisites</a></li>
         <li><a href="#setting-up-a-virtual-environment">Setting up a virtual environment - Optional</a></li>
         <li><a href="#local-development-setup">Local Development Setup</a></li>
       </ul>
@@ -87,15 +87,45 @@ src
         └───Configs                 # All the project configurations are maintained here. Create as many required for each environment of your project
         │   └───qa.properties       
         │   └───dev.properties      
-        └───Features                # All feature files consisting of test scenarios are kept in this folder. Create as many feature files as required.
+        └───Features                # All feature files consisting of test scenarios are kept in this folder.
 logs                                # Metric and execution logs displayed here
 target                              # Execution results will be shown under this folder
 └───cucumber-html-reports           # HTML reports will be created under this folder
-    └───overview.html               # Look for this file to open and view the execution reports. Same should be configured in CI-CD pipeline.
+    └───overview.html               # Look for this file to open and view the execution reports.
 README.md
 Contributing.md
 
 ```
+
+The folders that need to be maintained
+- By automation testers
+```
+pom.xml
+input-data/testdata.xlsx
+src/test/java/stepdefinitions
+src/test/resources/Configs
+src/test/resources/Features
+src/main/java/pageFactory
+```
+
+- By COE developers
+```
+pom.xml
+src/main/java/basetest
+src/main/java/driver
+src/main/java/utils
+src/main/java/pageFactory/PageClass.java
+src/test/java/runner/TestRunner.java
+```
+
+## Framework Installation & Setup
+### Pre-requisites
+- Install [Java 1.8][java-1.8]
+- Install [Maven][maven]
+- Install [Git][git] and clone this repository
+- Install [IntelliJ Idea][intellij] (preferred) or any other compatible IDE
+- Install all recommended [IntelliJ plugins][intellij-plugins]. Install the corresponding plugins if you're using any other IDE.
+- Set Java and Maven in the classpath _([How-to][classpath])_
 
 ## Contributing
 
@@ -104,3 +134,9 @@ To contribute to this repository, please see the [contribution guidelines](CONTR
 
 <!-- reference urls -->
 
+[git]: https://git-scm.com/
+[java-1.8]: https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html
+[maven]: https://maven.apache.org/install.html
+[intellij]: https://www.jetbrains.com/idea/
+[classpath]: https://docs.oracle.com/javase/tutorial/essential/environment/paths.html
+[intellij-plugins]: ./.idea/plugins.json
