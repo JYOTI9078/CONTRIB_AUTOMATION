@@ -157,6 +157,8 @@ src/test/java/runner/TestRunner.java
   - [ ] Serenity report integration
 - [x] Web Automation
   - [x] Web driver management
+  - [x] Local execution
+  - [x] Grid execution
   - [x] Multi-browser support
   - [ ] Browserstack/Saucelabs integration
 - [x] API Automation
