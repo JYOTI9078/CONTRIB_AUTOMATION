@@ -16,8 +16,8 @@
       <ul>
         <li><a href="#folder-structure">Folder Structure</a></li>
         <li><a href="#pre-requisites">Pre-requisites</a></li>
-        <li><a href="#setting-up-a-virtual-environment">Setting up a virtual environment - Optional</a></li>
-        <li><a href="#local-development-setup">Local Development Setup</a></li>
+        <li><a href="#setup">Setup</a></li>
+        <li><a href="#writing-your-first-test-scenario">Writing your first test scenario</a> </li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a>
@@ -122,10 +122,31 @@ src/test/java/runner/TestRunner.java
 ### Pre-requisites
 - Install [Java 1.8][java-1.8]
 - Install [Maven][maven]
+- Set Java and Maven in the [classpath][classpath]
 - Install [Git][git] and clone this repository
 - Install [IntelliJ Idea][intellij] (preferred) or any other compatible IDE
 - Install all recommended [IntelliJ plugins][intellij-plugins]. Install the corresponding plugins if you're using any other IDE.
-- Set Java and Maven in the classpath _([How-to][classpath])_
+
+### Setup
+- Open the [qa.properties][qa-properties] file in src/test/resources/Configs folder and update the configuration details such as: 
+<br/> Execution Server 
+<br/> Grid details 
+<br/> Test browser 
+<br/> Application Base URL
+- Open [pom.xml](pom.xml) and navigate to the plugin `org.apache.maven.plugins` under the `<build>` section. Update the name of your properties file in the `envName` variable.
+<br/> For instance, if your properties file name is qa.properties, then set the value of `envName` to _qa_.
+```
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    ...
+    <configuration>
+        <systemPropertyVariables>
+            <envName>qa</envName>
+```
+- If you wish to execute the test cases in any other environment such as dev or staging, then clone the qa.properties file, rename it appropriately, and update all the values corresponding to your new environment.
+
+### Writing your first test scenario
+
 
 ## Contributing
 
@@ -140,3 +161,4 @@ To contribute to this repository, please see the [contribution guidelines](CONTR
 [intellij]: https://www.jetbrains.com/idea/
 [classpath]: https://docs.oracle.com/javase/tutorial/essential/environment/paths.html
 [intellij-plugins]: ./.idea/plugins.json
+[qa-properties]: ./src/test/resources/Configs/qa.properties
