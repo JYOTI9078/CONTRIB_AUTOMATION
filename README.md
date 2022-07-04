@@ -33,7 +33,7 @@
         <li><a href="#allure-reports">Allure Reports</a></li>
       </ul>
     </li>
-    <li><a href="#reading-material">Reading Material</a>
+    <li><a href="#further-reading">Further Reading</a>
     <ul>
         <li><a href="#robot-framework-cheatsheets">Robot Framework Cheatsheets</a></li>
       </ul>
@@ -148,6 +148,16 @@ src/test/java/runner/TestRunner.java
 
 ### Writing your first test scenario
 
+## Further Reading
+- [Cucumber Frameworks][cucumber-frameworks]
+- Use of [Page Object Manager][page-object-manager] in a BDD framework
+- Know more about [Gherkin][gherkin]
+- Writing [Step Definitions][step-definitions]
+- Know more about [Web Driver Manager][webdrivermanager]
+- [Parallel execution][parallel-execution] using Cucumber
+- Know more about [Cucumber HTML Reports][cucumber-reporting]
+- How to configure Cucumber HTML Report in [Jenkins][cucumber-report-jenkins]
+
 ## Roadmap
 - [x] Base framework
   - [x] Environment management
@@ -188,7 +198,7 @@ src/test/java/runner/TestRunner.java
 To contribute to this repository, please see the [contribution guidelines](CONTRIBUTING.md).
 
 ### Contact
-For further information, inquiries and support, please reach out to QE&T Automation CoE - [DL IN Sogeti Test Automation COE](sogetitestautomationcoe.in@capgemini.com)
+For further information, inquiries and support, please reach out to QE&T Automation CoE - [DL IN Sogeti Test Automation COE](sogetitestautomationcoe.in@capgemini.com).
 
 
 <!-- reference urls -->
@@ -200,3 +210,11 @@ For further information, inquiries and support, please reach out to QE&T Automat
 [classpath]: https://docs.oracle.com/javase/tutorial/essential/environment/paths.html
 [intellij-plugins]: ./.idea/plugins.json
 [qa-properties]: ./src/test/resources/Configs/qa.properties
+[cucumber-frameworks]: https://github.com/RameshGhk/Cucumber_Test_Automation_Framework
+[page-object-manager]: https://www.toolsqa.com/selenium-cucumber-framework/page-object-manager/
+[gherkin]: https://cucumber.io/docs/gherkin/reference/
+[step-definitions]: https://cucumber.io/docs/gherkin/step-organization/
+[parallel-execution]: https://cucumber.io/docs/guides/parallel-execution/
+[cucumber-reporting]: https://github.com/damianszczepanik/cucumber-reporting
+[cucumber-report-jenkins]: https://github.com/jenkinsci/cucumber-reports-plugin/wiki/Detailed-Configuration
+[webdrivermanager]: https://bonigarcia.dev/webdrivermanager/
