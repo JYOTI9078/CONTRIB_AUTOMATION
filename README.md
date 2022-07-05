@@ -267,7 +267,7 @@ any UI tests in your test suite, then you can ignore the `-DheadlessMode` argume
 Using LITMUS framework, you can generate pretty HTML reports with stats and charts showing the results of execution at 
 Features, Test Scenario and Test Step levels. The generated report has no dependency so can be viewed offline.
 <br/>
-<img align="center" src=".blob/images/cucumber-html-report.png" alt="Cucumber HTML Report" style="width:800px"/>
+<img align="center" src=".blob/images/cucumber-html-report.png" alt="Cucumber HTML Report" style="width:600px"/>
 
 Cucumber HTML Reports are generated under `target/cucumber-html-reports` folder. Look for the `overview-features.html` file,
 simply double-click to open the report.
