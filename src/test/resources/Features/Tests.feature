@@ -1,5 +1,5 @@
 @tests
-Feature: Feature file for first commit
+Feature: Konakart application features
 
-  Scenario: Open Google on Chrome
-    Given user opens Google search page
+  Scenario: Login to Konakart
+    Given user opens Konakart application in browser
