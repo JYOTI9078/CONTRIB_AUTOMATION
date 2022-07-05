@@ -20,11 +20,11 @@
         <li><a href="#writing-your-first-test-scenario">Writing your first test scenario</a> </li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a>
+    <li><a href="#execution">Execution</a>
     <ul>
-        <li><a href="#runner-file">Runner File</a></li>
-        <li><a href="#yaml-configuration">YAML configuration</a></li>
-        <li><a href="#ci-cd-integration">CI/CD integration</a></li>
+        <li><a href="#local-execution">Local Execution</a></li>
+        <li><a href="#command-line-execution">Command-line Execution</a></li>
+        <li><a href="#ci-cd-integration">CI/CD Integration</a></li>
       </ul>
     </li>
     <li><a href="#reports">Reports</a>
@@ -185,7 +185,7 @@ to know more about designing step-definitions for your Gherkin scenarios.
 ```
 public class UserRegistrationSteps extends TestClass {
 ```
-_This next steps are required only if you're performing Web automation testing._
+_These next steps are required only if you're performing Web automation testing._
 4. Next create a new Java class in _src/main/java/com.sogeti.automation.test.pageFactory_. This class will be your page factory. You can create page objects and their corresponding methods in this class.
 5. Make sure that you extend _PageClass_ in all your page classes.
 ```
@@ -230,8 +230,43 @@ tags = "@logintests",
 ```
 Follow the above steps for all your feature files, step-definitions classes and page-object classes.
 
-## Further Reading
+## Execution
+### Local Execution
+To execute your test cases locally in your IDE, right-click the _TestRunner_ class and select Run. Make sure that you have updated the _tags_ of the test(s) that you want to run in the TestRunner class.
 
+### Command-line Execution
+Open a command prompt and navigate to your project folder. Use the following maven command to execute your tests:
+```
+mvn clean verify -DenvName=qa -DheadlessMode=false -Dcucumber.filter.tags=@alltests
+```
+Let's understand the additional arguments in the above command.
+- `-DenvName` will take the name of your property file. For instance, if your property file name is qa.properties, then set the value of `-DenvName` to _qa_.
+If you wish to execute the test cases in any other environment such as _dev_ or _staging_, then set the value of `-DenvName` to the name of the corresponding property file.
+- `-DheadlessMode` will take value as _true_ or _false_. If you wish to run your UI tests in headless mode, then set the value to _true_.
+- `-Dcucumber.filter.tags` will take the tag-name of the test scenario(s) that you wish to execute.
+<br/> Refer [Further Reading](#further-reading) to know more about maven command-line arguments.
+
+_Note: If you do not pass the additional arguments with the maven command, 
+then maven will take the default values of the System Property Variables that are set in pom.xml,
+and the tags that are passed in TestRunner class. 
+If no tags are specified in TestRunner, then maven will execute all the tests that are defined in the feature files._
+
+### CI/CD Integration
+LITMUS framework can be easily configured to run your tests on a CI/CD pipeline. 
+The same maven command is used for executing the test scripts in CI/CD pipeline. Specify the below command in the 
+build goals of your Jenkins setup or the pipeline execution script.
+```
+mvn clean verify -DenvName=qa -DheadlessMode=true
+```
+Ideally you should not pass any tags while executing on the pipeline, since the objective is to execute all your tests.
+However, if you wish to execute a subset of test scripts, then add the `-Dcucumber.filter.tags` argument as well to the 
+above command and pass the desired tag(s) as shown in [Command-line Execution](#command-line-execution) section.
+<br/> It is also a good practice to run your UI tests in headless mode for faster execution.
+<br/> _Note: If you don't have 
+any UI tests in your test suite, then you can ignore the `-DheadlessMode` argument._
+
+
+## Further Reading
 - Know more about [Cucumber Frameworks][cucumber-frameworks]
 - Use of [Page Object Manager][page-object-manager] in a BDD framework
 - Know more about [Gherkin][gherkin]
@@ -240,12 +275,12 @@ Follow the above steps for all your feature files, step-definitions classes and 
 - Writing [Step Definitions][step-definitions]
 - Know more about [Web Driver Manager][webdrivermanager]
 - Why should you run your tests in [Headless Mode][headless-mode]?
+- Know more about [Maven command-line options][maven-arguments]
 - [Parallel execution][parallel-execution] using Cucumber
 - Know more about [Cucumber HTML Reports][cucumber-reporting]
 - How to configure Cucumber HTML Report in [Jenkins][cucumber-report-jenkins]
 
 ## Roadmap
-
 - [x] Base framework
     - [x] Environment management
     - [x] Test input management
@@ -308,3 +343,4 @@ For further information, inquiries and support, please reach out to QE&T Automat
 [cucumber-report-jenkins]: https://github.com/jenkinsci/cucumber-reports-plugin/wiki/Detailed-Configuration
 [webdrivermanager]: https://bonigarcia.dev/webdrivermanager/
 [headless-mode]: https://smartbear.com/blog/selenium-tests-headless/
+[maven-arguments]: https://books.sonatype.com/mvnref-book/reference/running-sect-options.html
