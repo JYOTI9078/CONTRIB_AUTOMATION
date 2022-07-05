@@ -27,12 +27,7 @@
         <li><a href="#ci-cd-integration">CI/CD Integration</a></li>
       </ul>
     </li>
-    <li><a href="#reports">Reports</a>
-    <ul>
-        <li><a href="#robot-reports">Robot Reports</a></li>
-        <li><a href="#allure-reports">Allure Reports</a></li>
-      </ul>
-    </li>
+    <li><a href="#reports">Reports</a></li>
     <li><a href="#further-reading">Further Reading</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a> </li>
@@ -44,7 +39,7 @@
 ## About the project
 
 This is a multipurpose kickstarter framework built on Java and Cucumber. The framework has BDD at its core
-as it allows the user to write tests in plain English using Gherkin.
+as it allows you to write tests in plain English using Gherkin syntax that are easy to understand.
 
 ```
 Scenario Outline: Verify the login functionality
@@ -55,6 +50,8 @@ Scenario Outline: Verify the login functionality
        | username   | password  |
        | user1      | pwd123    |
 ```
+This framework also has a rich pre-built library of utilities that lets you start developing test scripts and
+executing those right from day-1.
 
 ## Getting Started
 
@@ -92,7 +89,7 @@ src
 logs                                # Metric and execution logs displayed here
 target                              # Execution results will be shown under this folder
 └───cucumber-html-reports           # HTML reports will be created under this folder
-    └───overview.html               # Look for this file to open and view the execution reports.
+    └───overview-features.html      # Look for this file to open and view the execution reports.
 README.md
 Contributing.md
 
@@ -264,6 +261,17 @@ above command and pass the desired tag(s) as shown in [Command-line Execution](#
 <br/> It is also a good practice to run your UI tests in headless mode for faster execution.
 <br/> _Note: If you don't have 
 any UI tests in your test suite, then you can ignore the `-DheadlessMode` argument._
+
+
+## Reports
+Using LITMUS framework, you can generate pretty HTML reports with stats and charts showing the results of execution at 
+Features, Test Scenario and Test Step levels. The generated report has no dependency so can be viewed offline.
+<img align="center" src=".blob/images/cucumber-html-report.png" alt="Cucumber HTML Report" style="width:800px"/>
+
+Cucumber HTML Reports are generated under `target/cucumber-html-reports` folder. Look for the `overview-features.html` file,
+simply double-click to open the report.
+<br/> Cucumber HTML Report can be easily integrated with Jenkins as well. Please refer [Further Reading](#further-reading)
+for more details.
 
 
 ## Further Reading
