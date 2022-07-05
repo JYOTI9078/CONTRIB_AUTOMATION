@@ -1,6 +1,6 @@
 <h1 align="center"> LITMUS 1.0</h1>
 <p align="center">
-    Java-BDD Framework for Web & API Test Automation
+    Java-based BDD Test Automation Framework
     <br/>
 </p>
 
@@ -8,11 +8,8 @@
 <details>
   <summary>Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
+    <li><a href="#about-the-project">About the Project</a></li>
+    <li><a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#folder-structure">Folder Structure</a></li>
         <li><a href="#pre-requisites">Pre-requisites</a></li>
@@ -21,7 +18,7 @@
       </ul>
     </li>
     <li><a href="#execution">Execution</a>
-    <ul>
+      <ul>
         <li><a href="#local-execution">Local Execution</a></li>
         <li><a href="#command-line-execution">Command-line Execution</a></li>
         <li><a href="#ci-cd-integration">CI/CD Integration</a></li>
