@@ -174,11 +174,61 @@ src/test/java/runner/TestRunner.java
 
 Once the framework installation and setup is complete, you are now ready to start writing your test scripts.
 
-- First create a new feature file in _src/test/resources/Features_ folder. Right-click on the Features folder and create a
+1. First create a new feature file in _src/test/resources/Features_ folder. Right-click on the Features folder and create a
   new file. Give it an appropriate name and make sure the file name ends with _.feature_. IntelliJ will automatically
   detect it as a cucumber feature file (given that you have installed all the plugins correctly).
-- Write your test scenarios in this feature file. Refer [Further Reading](#further-reading) to know more about writing test scenarios using Gherkin.
-- Then create a new Java class in _src/test/java/stepdefinitions_.
+2.Write your test scenarios in this feature file. Refer [Further Reading](#further-reading) to know more about 
+writing test scenarios using Gherkin.
+3. Then create a new Java class in _src/test/java/stepdefinitions_. Refer [Further Reading](#further-reading)
+to know more about designing step-definitions for your Gherkin scenarios.
+4. Make sure that you extend _TestClass_ in all your step-definition classes.
+```
+public class UserRegistrationSteps extends TestClass {
+```
+_This next steps are required only if you're performing Web automation testing._
+4. Next create a new Java class in _src/main/java/com.sogeti.automation.test.pageFactory_. This class will be your page factory. You can create page objects and their corresponding methods in this class.
+5. Make sure that you extend _PageClass_ in all your page classes.
+```
+public class UserRegistrationPage extends PageClass {
+```
+6. Create a constructor in your page class as shown below:
+```
+public UserRegistrationPage(WebDriver driver) {
+    super(driver);
+    wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MediumWait));
+    PageFactory.initElements(driver, this);
+}
+```
+7. Next, open _PageObjectManager_ class and make an entry for your page class as shown below:
+```
+public class PageObjectManager {
+  ...
+  private UserRegistrationPage userRegistrationPage;
+  ...
+  ...
+  public UserRegistrationPage getUserRegistrationPage() {
+    return (userRegistrationPage == null) ? userRegistrationPage = new UserRegistrationPage(driver) : userRegistrationPage;
+  }
+```
+Refer [Further Reading](#further-reading) to understand more about PageObjectManager.
+8. Now go back to your step-definition class which you created in step 3, and create a constructor as shown below:
+```
+private UserRegistrationPage userRegistrationPage;
+...
+...
+public UserRegistrationSteps(TestContext context) throws Exception {
+    super();
+    this.testContext = context;
+    userRegistrationPage = testContext.getPageObjectManager().getUserRegistrationPage();
+    ThreadContext.pop();
+    ThreadContext.push(this.getClass().getSimpleName());
+}
+```
+9. Assign tags to you test scenarios in the Feature files. Update the same tags in the _TestRunner_ class for execution.
+```
+tags = "@logintests",
+```
+Follow the above steps for all your feature files, step-definitions classes and page-object classes.
 
 ## Further Reading
 
@@ -186,6 +236,7 @@ Once the framework installation and setup is complete, you are now ready to star
 - Use of [Page Object Manager][page-object-manager] in a BDD framework
 - Know more about [Gherkin][gherkin]
 - How to write [Gherkin test scenarios][gherkin-test-scenarios]
+- Learn to use [Tags][cucumber-tags] efficiently with cucumber test scenarios
 - Writing [Step Definitions][step-definitions]
 - Know more about [Web Driver Manager][webdrivermanager]
 - Why should you run your tests in [Headless Mode][headless-mode]?
@@ -234,8 +285,7 @@ To contribute to this repository, please see the [contribution guidelines](CONTR
 
 ## Contact
 
-For further information, inquiries and support, please reach out to QE&T Automation CoE
-- [DL IN Sogeti Test Automation COE](sogetitestautomationcoe.in@capgemini.com).
+For further information, inquiries and support, please reach out to QE&T Automation CoE - [DL IN Sogeti Test Automation COE](sogetitestautomationcoe.in@capgemini.com).
 
 
 <!-- reference urls -->
@@ -251,7 +301,8 @@ For further information, inquiries and support, please reach out to QE&T Automat
 [page-object-manager]: https://www.toolsqa.com/selenium-cucumber-framework/page-object-manager/
 [gherkin]: https://cucumber.io/docs/gherkin/reference/
 [gherkin-test-scenarios]: https://cucumber.io/docs/guides/10-minute-tutorial/#write-a-scenario
-[step-definitions]: https://cucumber.io/docs/gherkin/step-organization/
+[cucumber-tags]: https://cucumber.io/docs/cucumber/api/#tags
+[step-definitions]: https://cucumber.io/docs/cucumber/step-definitions/
 [parallel-execution]: https://cucumber.io/docs/guides/parallel-execution/
 [cucumber-reporting]: https://github.com/damianszczepanik/cucumber-reporting
 [cucumber-report-jenkins]: https://github.com/jenkinsci/cucumber-reports-plugin/wiki/Detailed-Configuration
