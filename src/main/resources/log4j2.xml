@@ -29,13 +29,13 @@
 
     <Loggers>
 
-        <Logger name="com.sogeti.automation" additivity="true" level="all">
+        <Logger name="com.sogeti.automation" additivity="true" level="info">
             <AppenderRef ref="LogToFile" />
-            <AppenderRef ref="LogToConsole"  />
         </Logger>
 
         <Root level="info">
             <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFile"/>
         </Root>
 
     </Loggers>

@@ -1,7 +1,7 @@
-# Contributing to the BDD Automation Framework
+# Contributing to LITMUS Automation Framework
 
-See the [README](README.md) to get an overview of the project
-To provide feedback, please follow the guidance in this document.
+See the [README](README.md) to get an overview of the project.
+<br/> To provide feedback, please follow the guidance in this document.
 
 Use your best judgment and feel free to propose changes to anything in this repository, including these contribution guidelines.
 
@@ -12,14 +12,15 @@ Use your best judgment and feel free to propose changes to anything in this repo
 
 ## Recommended setup for contributing
 
-<!-- TODO: ADD ITEMS TO LIST BELOW REQUIRED FOR JAVA -->
+<!-- ADD ITEMS REQUIRED FOR JAVA IN THE LIST BELOW  -->
 
 - Install [Git][git] and clone this repository
-- Install [Java 11][java-11]
+- Install [Java 1.8][java-1.8]
 - Install [Maven][maven]
-- Install [IntelliJ Idea][intellij] (preferred) or any other compatible IDE.
-- Install all recommended IntelliJ plugins (included in /.idea/plugins.json).
-- Set Java and Maven in the classpath.
+- Set Java and Maven in the [classpath][classpath]
+- Install [IntelliJ Idea][intellij] (preferred) or any other compatible IDE
+- Install all recommended [IntelliJ plugins][intellij-plugins]. Install the corresponding plugins if you're using any
+  other IDE.
 
 ## Documentation style guide
 
@@ -77,6 +78,8 @@ Pull requests serve as the primary mechanism by which contributions are proposed
 [github-flow-guide]: https://guides.github.com/introduction/flow/
 [repo--appdev-workstation-configuration]: https://dev.azure.com/plantemorancode/AppDev%20Starter%20Kits/_git/appdev-workstation-config
 [topic-branch]: https://www.git-scm.com/book/en/v2/Git-Branching-Branching-Workflows#Topic-Branches
-[java-11]: https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html
+[java-1.8]: https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html
 [maven]: https://maven.apache.org/install.html
 [intellij]: https://www.jetbrains.com/idea/
+[intellij-plugins]: ./.idea/plugins.json
+[classpath]: https://docs.oracle.com/javase/tutorial/essential/environment/paths.html

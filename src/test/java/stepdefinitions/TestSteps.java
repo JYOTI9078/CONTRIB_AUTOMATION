@@ -22,7 +22,7 @@ public class TestSteps extends TestClass {
         ThreadContext.push(this.getClass().getSimpleName());
     }
 
-    @Given("^user opens Google search page$")
+    @Given("^user opens Konakart application in browser$")
     public void openGoogle() throws InterruptedException {
         Thread.sleep(5000);
     }
