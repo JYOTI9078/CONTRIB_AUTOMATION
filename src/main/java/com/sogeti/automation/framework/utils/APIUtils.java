@@ -1,6 +1,9 @@
 package com.sogeti.automation.framework.utils;
 
 import com.sogeti.automation.framework.constants.AppConstants;
+import com.sogeti.automation.framework.constants.AppConstants.Api;
+import com.sogeti.automation.framework.constants.AppConstants.Api.AuthenticationType;
+import com.sogeti.automation.framework.constants.AppConstants.Api.GrantType;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -17,21 +20,68 @@ public class APIUtils {
     private String body;
     private RequestSpecification request;
 
+
+
     public APIUtils() {
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
         request = this.headerSetup();
     }
 
+    public APIUtils(AuthenticationType authType) {
+        ThreadContext.pop();
+        ThreadContext.push(this.getClass().getSimpleName());
+
+        switch (authType) {
+            case Basic:
+                request = this.headerSetupBasic(Api.API_USERNAME, Api.API_PASSWORD);
+                break;
+            case Digest:
+                request = this.headerSetupDigest(Api.API_USERNAME, Api.API_PASSWORD);
+                break;
+            case Token:
+                request = this.headerSetup(Api.API_TOKEN);
+                break;
+            default:
+                log.error("INVALID API AUTHENTICATION TYPE");
+                break;
+        }
+
+    }
+
+    public APIUtils(AuthenticationType authType, GrantType grantType) {
+        ThreadContext.pop();
+        ThreadContext.push(this.getClass().getSimpleName());
+
+        if (authType == AuthenticationType.OAuth2) {
+            switch (grantType) {
+                case Client_Credentials:
+                    request = this.headerSetup(getAccessTokenWithClientCredentials());
+                    break;
+                case Authorization_Code:
+                    request = this.headerSetup(getAccessTokenWithAuthorizationCode());
+                    break;
+                case Password:
+                    request = this.headerSetup(getAccessTokenWithPassword());
+                    break;
+                default:
+                    log.error("INVALID GRANT TYPE PASSED FOR API AUTHENTICATION");
+                    break;
+            }
+        } else {
+            log.error("INVALID API AUTHENTICATION TYPE");
+        }
+    }
+
     /**
      * @Description: This method is used to return a Bearer-token for API calls
      * by using the token configuration details in the properties file.
      */
-    private String getAccessToken() {
+    private String getAccessTokenWithClientCredentials() {
         String accessToken = null;
         String tokenType = null;
 
-        log.info("Trying to generate API Bearer token...");
+        log.info("Trying to generate API Access token...");
         Response response = given().auth().preemptive()
                 .basic(AppConstants.Api.API_USERNAME, AppConstants.Api.API_PASSWORD)
                 .contentType("application/x-www-form-urlencoded")
@@ -40,7 +90,63 @@ public class APIUtils {
                 .when()
                 .post(AppConstants.Api.API_ACCESS_TOKEN_URL);
 
-        log.info("Bearer token generated successfully.");
+        log.info("Access token generated successfully.");
+        JSONObject jsonObject = new JSONObject(response.getBody().asString());
+        accessToken = jsonObject.getString("access_token");
+        tokenType = jsonObject.getString("token_type");
+
+        return (tokenType + " " + accessToken);
+    }
+
+    /**
+     * @Description: This method is used to return a Bearer-token for API calls
+     * by using the token configuration details in the properties file.
+     */
+    private String getAccessTokenWithPassword() {
+        String accessToken = null;
+        String tokenType = null;
+
+        log.info("Trying to generate API Access token...");
+        Response response = given().auth().preemptive()
+                .basic(Api.API_CLIENT_ID, Api.API_CLIENT_SECRET)
+                .contentType("application/x-www-form-urlencoded")
+                .formParam("grant_type", Api.API_GRANT_TYPE)
+                .formParam("scope", Api.API_SCOPE)
+                .formParam("username", Api.API_USERNAME)
+                .formParam("password", Api.API_PASSWORD)
+                .when()
+                .post(AppConstants.Api.API_ACCESS_TOKEN_URL);
+
+        log.info("Access token generated successfully.");
+        JSONObject jsonObject = new JSONObject(response.getBody().asString());
+        accessToken = jsonObject.getString("access_token");
+        tokenType = jsonObject.getString("token_type");
+
+        return (tokenType + " " + accessToken);
+    }
+
+    /**
+     * @Description: This method is used to return a Bearer-token for API calls
+     * by using the token configuration details in the properties file.
+     */
+    private String getAccessTokenWithAuthorizationCode() {
+        String accessToken = null;
+        String tokenType = null;
+
+        log.info("Trying to generate API Access token...");
+        Response response = given()
+                .header("Authorization", Api.API_CLIENT_ID, Api.API_CLIENT_SECRET)
+                .contentType("application/x-www-form-urlencoded")
+                .formParam("grant_type", Api.API_GRANT_TYPE)
+                .formParam("redirect_uri",Api.API_REDIRECT_URL)
+                .formParam("response_type", Api.API_RESPONSE_TYPE)
+                .formParam("code", Api.API_AUTHORIZATION_CODE)
+                .formParam("client_id", Api.API_CLIENT_ID)
+                .formParam("client_secret", Api.API_CLIENT_SECRET)
+                .when()
+                .post(AppConstants.Api.API_ACCESS_TOKEN_URL);
+
+        log.info("Access token generated successfully.");
         JSONObject jsonObject = new JSONObject(response.getBody().asString());
         accessToken = jsonObject.getString("access_token");
         tokenType = jsonObject.getString("token_type");
@@ -73,12 +179,25 @@ public class APIUtils {
     /**
      * @Description: This is the common header setup to be used in all API calls with Basic authentication
      */
-    private RequestSpecification headerSetup(String userName, String password) {
+    private RequestSpecification headerSetupBasic(String userName, String password) {
         log.info("Setting up API call header without authorization...");
         return given().header("Content-Type", ContentType.JSON)
                 .header("Accept", ContentType.JSON)
                 .auth()
+                .preemptive()
                 .basic(userName, password)
+                .when();
+    }
+
+    /**
+     * @Description: This is the common header setup to be used in all API calls with Basic authentication
+     */
+    private RequestSpecification headerSetupDigest(String userName, String password) {
+        log.info("Setting up API call header without authorization...");
+        return given().header("Content-Type", ContentType.JSON)
+                .header("Accept", ContentType.JSON)
+                .auth()
+                .digest(userName, password)
                 .when();
     }
 
