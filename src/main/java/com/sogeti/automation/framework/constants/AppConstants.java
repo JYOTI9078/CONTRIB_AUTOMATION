@@ -24,8 +24,29 @@ public class AppConstants {
         public static String API_USERNAME = null;
         public static String API_PASSWORD = null;
         public static String API_GRANT_TYPE = null;
+        public static String API_TOKEN = null;
         public static String API_SCOPE = null;
         public static String API_ACCESS_TOKEN_URL = null;
+        public static String API_CLIENT_ID = null;
+        public static String API_CLIENT_SECRET = null;
+        public static String API_REDIRECT_URL = null;
+        public static String API_RESPONSE_TYPE = null;
+        public static String API_AUTHORIZATION_CODE = null;
+        public static String API_CODE_CHALLENGE = null;
+        public static String API_CODE_CHALLENGE_METHOD = null;
+
+        public enum AuthenticationType {
+            Basic,
+            Digest,
+            Token,
+            OAuth2
+        }
+
+        public enum GrantType {
+            Authorization_Code,
+            Client_Credentials,
+            Password
+        }
 
         static {
             try {
@@ -61,6 +82,14 @@ public class AppConstants {
 
         static {
             try {
+                API_TOKEN = PropertyReader.getFieldValue("API_TOKEN");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        static {
+            try {
                 API_SCOPE = PropertyReader.getFieldValue("API_SCOPE");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -75,6 +104,61 @@ public class AppConstants {
             }
         }
 
+        static {
+            try {
+                API_CLIENT_ID = PropertyReader.getFieldValue("API_CLIENT_ID");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        static {
+            try {
+                API_CLIENT_SECRET = PropertyReader.getFieldValue("API_CLIENT_SECRET");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        static {
+            try {
+                API_REDIRECT_URL = PropertyReader.getFieldValue("API_REDIRECT_URL");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        static {
+            try {
+                API_RESPONSE_TYPE = PropertyReader.getFieldValue("API_RESPONSE_TYPE");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        static {
+            try {
+                API_AUTHORIZATION_CODE = PropertyReader.getFieldValue("API_AUTHORIZATION_CODE");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        static {
+            try {
+                API_CODE_CHALLENGE = PropertyReader.getFieldValue("API_CODE_CHALLENGE");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        static {
+            try {
+                API_CODE_CHALLENGE_METHOD = PropertyReader.getFieldValue("API_CODE_CHALLENGE_METHOD");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     static {
