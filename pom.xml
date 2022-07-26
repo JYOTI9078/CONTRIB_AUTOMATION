@@ -15,6 +15,7 @@
         <selenium.version>4.1.1</selenium.version>
         <testng.version>7.5</testng.version>
         <cucumber.version>7.2.3</cucumber.version>
+        <restassured.version>4.5.1</restassured.version>
     </properties>
 
     <name>LITMUS 1.0</name>
@@ -105,7 +106,24 @@
             <version>5.2.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${restassured.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${restassured.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20211205</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
