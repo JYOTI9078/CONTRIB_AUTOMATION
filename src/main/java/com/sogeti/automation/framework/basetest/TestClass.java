@@ -42,7 +42,7 @@ public class TestClass {
     }
 
     public WebDriver setupEnvironment(String browser) {
-        this.testURL = AppConstants.UI_BASE_URL;
+        this.testURL = AppConstants.Web.UI_BASE_URL;
         gDriver = new GlobalDriver();
         driver = gDriver.init(browser);
         driver.get(testURL);

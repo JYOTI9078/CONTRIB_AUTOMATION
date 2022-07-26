@@ -67,10 +67,10 @@ public class GlobalDriver {
             WebDriverManager.chromedriver().clearResolutionCache().setup();
 
             if (executionServer.equalsIgnoreCase("remote")) {
-                Main.main(new String[]{"standalone", "--port", AppConstants.GRIP_HUB_PORT});
+                Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
                 _ldriver = WebDriverManager.chromedriver()
                         .capabilities(setChromeOptions())
-                        .remoteAddress(AppConstants.GRID_HUB_URL)
+                        .remoteAddress(AppConstants.Web.GRID_HUB_URL)
                         .create();
             } else {
                 _ldriver = new ChromeDriver(setChromeOptions());
@@ -80,10 +80,10 @@ public class GlobalDriver {
             WebDriverManager.firefoxdriver().clearResolutionCache().setup();
 
             if (executionServer.equalsIgnoreCase("remote")) {
-                Main.main(new String[]{"standalone", "--port", AppConstants.GRIP_HUB_PORT});
+                Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
                 _ldriver = WebDriverManager.firefoxdriver()
                         .capabilities(setFirefoxOptions())
-                        .remoteAddress(AppConstants.GRID_HUB_URL)
+                        .remoteAddress(AppConstants.Web.GRID_HUB_URL)
                         .create();
             } else {
                 _ldriver = new FirefoxDriver(setFirefoxOptions());
@@ -93,10 +93,10 @@ public class GlobalDriver {
             WebDriverManager.edgedriver().clearResolutionCache().setup();
 
             if (executionServer.equalsIgnoreCase("remote")) {
-                Main.main(new String[]{"standalone", "--port", AppConstants.GRIP_HUB_PORT});
+                Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
                 _ldriver = WebDriverManager.edgedriver()
                         .capabilities(setEdgeOptions())
-                        .remoteAddress(AppConstants.GRID_HUB_URL)
+                        .remoteAddress(AppConstants.Web.GRID_HUB_URL)
                         .create();
             } else {
                 _ldriver = new EdgeDriver(setEdgeOptions());
