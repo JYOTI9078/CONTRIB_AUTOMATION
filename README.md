@@ -341,7 +341,6 @@ for more details.
     - [x] Test input management
     - [ ] Parallel execution
     - [x] Cucumber HTML report integration
-    - [ ] Serenity report integration
 - [x] Web Automation
     - [x] Web driver management
     - [x] Local execution
