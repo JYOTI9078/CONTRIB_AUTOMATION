@@ -26,11 +26,13 @@ public class APIUtils {
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
         request = this.headerSetup();
+        log = new Logging(this.getClass().getName());
     }
 
     public APIUtils(AuthenticationType authType) {
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
+        log = new Logging(this.getClass().getName());
 
         switch (authType) {
             case Basic:
@@ -52,6 +54,7 @@ public class APIUtils {
     public APIUtils(AuthenticationType authType, GrantType grantType) {
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
+        log = new Logging(this.getClass().getName());
 
         if (authType == AuthenticationType.OAuth2) {
             switch (grantType) {
@@ -169,10 +172,10 @@ public class APIUtils {
      * authentication
      */
     private RequestSpecification headerSetup(String accessToken) {
-        log.info("Setting up API call header without authorization...");
+        log.info("Setting up API call header with Bearer token authorization...");
         return given().header("Content-Type", ContentType.JSON)
-                .header("Accept", ContentType.JSON)
-                .header("Authorization", accessToken)
+                .header("Accept", ContentType.ANY)
+                .header("Authorization", "Bearer " + accessToken)
                 .when();
     }
 
@@ -180,9 +183,10 @@ public class APIUtils {
      * @Description: This is the common header setup to be used in all API calls with Basic authentication
      */
     private RequestSpecification headerSetupBasic(String userName, String password) {
-        log.info("Setting up API call header without authorization...");
-        return given().header("Content-Type", ContentType.JSON)
-                .header("Accept", ContentType.JSON)
+        log.info("Setting up API call header with Basic Authentication...");
+        return given()
+                .header("Content-Type", ContentType.JSON)
+                .header("Accept", ContentType.ANY)
                 .auth()
                 .preemptive()
                 .basic(userName, password)
@@ -193,7 +197,7 @@ public class APIUtils {
      * @Description: This is the common header setup to be used in all API calls with Basic authentication
      */
     private RequestSpecification headerSetupDigest(String userName, String password) {
-        log.info("Setting up API call header without authorization...");
+        log.info("Setting up API call header with Digest authorization...");
         return given().header("Content-Type", ContentType.JSON)
                 .header("Accept", ContentType.JSON)
                 .auth()
@@ -207,48 +211,25 @@ public class APIUtils {
      * @return Rest-Assured Response
      * @Description: This method will make a GET call and return the response data
      */
-    public Response getAPIResponse(String url, Map<String, Object> queryParams) {
+    public Response executeGET(String url, Map<String, Object> queryParams) {
         Response response = null;
 
-        log.info("Executing GET API call...");
-//        RequestSpecification request = this.headerSetup();
+        log.info("Executing GET API call for " + url);
         RequestSpecification[] when = {request};
         try {
             if (queryParams != null)
                 queryParams.forEach((key, value) -> when[0].queryParam(key, value));
 
             response = when[0].get(url);
+            response.then().extract().response();
             log.info("GET API call executed successfully.");
 
-            response.then().extract().response();
             return response;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to get data from API", e);
+            throw new RuntimeException("Failed to execute API\n", e);
         }
 
-    }
-
-    /**
-     * @param url      = BASE_URI + endpoint
-     * @param queryMap = Map of all the query parameters for the API call
-     * @return Status-code as integer
-     * @Description: This method will return the status code of the GET API call
-     */
-    public int getAPIStatusCode(String url, Map<String, Object> queryMap) {
-        Response response = null;
-
-        log.info("Trying to execute GET API call...");
-//        RequestSpecification request = this.headerSetup();
-        RequestSpecification[] when = {request};
-
-        if (queryMap != null)
-            queryMap.forEach((key, value) -> when[0] = when[0].queryParam(key, value));
-
-        response = when[0].get(url);
-        log.info("GET API call executed successfully.");
-
-        return response.getStatusCode();
     }
 
     /**
@@ -259,48 +240,24 @@ public class APIUtils {
      * @Description: This method will make a POST call with request body and query parameters
      * and return the response message
      */
-    public Response postAPIResponse(String url, String requestBody, Map<String, Object> queryMap) {
+    public Response executePOST(String url, String requestBody, Map<String, Object> queryMap) {
         Response response = null;
 
-        log.info("Trying to execute POST API call...");
-//        RequestSpecification request = this.headerSetup();
+        log.info("Executing POST API call for " + url);
         RequestSpecification[] when = {request};
         try {
             if (queryMap != null)
                 queryMap.forEach((key, value) -> when[0] = when[0].queryParam(key, value));
 
             response = when[0].body(requestBody).post(url);
+            response.then().extract().response();
             log.info("POST API call executed successfully.");
 
-            response.then().extract().response();
             return response;
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to get data from API", e);
         }
-    }
-
-    /**
-     * @param url          = BASE_URI + endpoint
-     * @param requestBody = the request body in JSON format
-     * @param queryMap     = Map of all the query parameters for the API call
-     * @return Status-code as integer
-     * @Description: This method will return the status-code of POST call with request body and query parameters
-     */
-    public int postAPIStatusCode(String url, String requestBody, Map<String, Object> queryMap) {
-        Response response = null;
-
-        log.info("Trying to execute POST API call...");
-//        RequestSpecification request = this.headerSetup();
-        RequestSpecification[] when = {request};
-
-        if (queryMap != null)
-            queryMap.forEach((key, value) -> when[0] = when[0].queryParam(key, value));
-
-        response = when[0].body(requestBody).post(url);
-        log.info("POST API call executed successfully.");
-
-        return response.getStatusCode();
     }
 
     /**
@@ -311,48 +268,24 @@ public class APIUtils {
      * @Description: This method will make a PUT call with request body and query parameters
      * and return the response message
      */
-    public Response putAPIResponse(String url, String requestBody, Map<String, Object> queryMap) {
+    public Response executePUT(String url, String requestBody, Map<String, Object> queryMap) {
         Response response = null;
 
-        log.info("Trying to execute POST API call...");
-//        RequestSpecification request = this.headerSetup();
+        log.info("Executing PUT API call for " + url);
         RequestSpecification[] when = {request};
         try {
             if (queryMap != null)
                 queryMap.forEach((key, value) -> when[0] = when[0].queryParam(key, value));
 
             response = when[0].body(requestBody).put(url);
+            response.then().extract().response();
             log.info("PUT API call executed successfully.");
 
-            response.then().extract().response();
             return response;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to get data from API", e);
+            throw new RuntimeException("Failed to execute API\n", e);
         }
-    }
-
-    /**
-     * @param url          = BASE_URI + endpoint
-     * @param requestBody = the request body in JSON format
-     * @param queryMap     = Map of all the query parameters for the API call
-     * @return Status-code as integer
-     * @Description: This method will return the status-code of PUT call with request body and query parameters
-     */
-    public int putAPIStatusCode(String url, String requestBody, Map<String, Object> queryMap) {
-        Response response = null;
-
-        log.info("Trying to execute POST API call...");
-//        RequestSpecification request = this.headerSetup();
-        RequestSpecification[] when = {request};
-
-        if (queryMap != null)
-            queryMap.forEach((key, value) -> when[0] = when[0].queryParam(key, value));
-
-        response = when[0].body(requestBody).put(url);
-        log.info("PUT API call executed successfully.");
-
-        return response.getStatusCode();
     }
 
     /**
@@ -363,48 +296,51 @@ public class APIUtils {
      * @Description: This method will make a PATCH call with request body and query parameters
      * and return the response message
      */
-    public Response patchAPIResponse(String url, String requestBody, Map<String, Object> queryMap) {
+    public Response executePATCH(String url, String requestBody, Map<String, Object> queryMap) {
         Response response = null;
 
-        log.info("Trying to execute POST API call...");
-//        RequestSpecification request = this.headerSetup();
+        log.info("Executing PATCH API call for " + url);
         RequestSpecification[] when = {request};
         try {
             if (queryMap != null)
                 queryMap.forEach((key, value) -> when[0] = when[0].queryParam(key, value));
 
             response = when[0].body(requestBody).patch(url);
+            response.then().extract().response();
             log.info("PATCH API call executed successfully.");
 
-            response.then().extract().response();
             return response;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to get data from API", e);
+            throw new RuntimeException("Failed to execute API\n", e);
         }
     }
 
     /**
      * @param url          = BASE_URI + endpoint
-     * @param requestBody = the request body in JSON format
      * @param queryMap     = Map of all the query parameters for the API call
-     * @return Status-code as integer
-     * @Description: This method will return the status-code of PATCH call with request body and query parameters
+     * @return Rest-Assured response
+     * @Description: This method will make a DELETE call with request body and query parameters
+     * and return the response message
      */
-    public int patchAPIStatusCode(String url, String requestBody, Map<String, Object> queryMap) {
+    public Response executeDELETE(String url, Map<String, Object> queryMap) {
         Response response = null;
 
-        log.info("Trying to execute POST API call...");
-//        RequestSpecification request = this.headerSetup();
+        log.info("Executing DELETE API call for " + url);
         RequestSpecification[] when = {request};
+        try {
+            if (queryMap != null)
+                queryMap.forEach((key, value) -> when[0] = when[0].queryParam(key, value));
 
-        if (queryMap != null)
-            queryMap.forEach((key, value) -> when[0] = when[0].queryParam(key, value));
+            response = when[0].delete(url);
+            response.then().extract().response();
+            log.info("DELETE API call executed successfully.");
 
-        response = when[0].body(requestBody).patch(url);
-        log.info("PATCH API call executed successfully.");
-
-        return response.getStatusCode();
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to execute API\n", e);
+        }
     }
 
     /**
@@ -415,48 +351,24 @@ public class APIUtils {
      * @Description: This method will make a DELETE call with request body and query parameters
      * and return the response message
      */
-    public Response deleteAPIResponse(String url, String requestBody, Map<String, Object> queryMap) {
+    public Response executeDELETE(String url, String requestBody, Map<String, Object> queryMap) {
         Response response = null;
 
-        log.info("Trying to execute POST API call...");
-//        RequestSpecification request = this.headerSetup();
+        log.info("Executing DELETE API call for " + url);
         RequestSpecification[] when = {request};
         try {
             if (queryMap != null)
                 queryMap.forEach((key, value) -> when[0] = when[0].queryParam(key, value));
 
             response = when[0].body(requestBody).delete(url);
+            response.then().extract().response();
             log.info("DELETE API call executed successfully.");
 
-            response.then().extract().response();
             return response;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to get data from API", e);
+            throw new RuntimeException("Failed to execute API\n", e);
         }
-    }
-
-    /**
-     * @param url          = BASE_URI + endpoint
-     * @param requestBody = the request body in JSON format
-     * @param queryMap     = Map of all the query parameters for the API call
-     * @return Status-code as integer
-     * @Description: This method will return the status-code of DELETE call with request body and query parameters
-     */
-    public int deleteAPIStatusCode(String url, String requestBody, Map<String, Object> queryMap) {
-        Response response = null;
-
-        log.info("Trying to execute POST API call...");
-//        RequestSpecification request = this.headerSetup();
-        RequestSpecification[] when = {request};
-
-        if (queryMap != null)
-            queryMap.forEach((key, value) -> when[0] = when[0].queryParam(key, value));
-
-        response = when[0].body(requestBody).delete(url);
-        log.info("DELETE API call executed successfully.");
-
-        return response.getStatusCode();
     }
 
 }
