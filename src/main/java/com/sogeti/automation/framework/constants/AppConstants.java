@@ -3,6 +3,15 @@ package com.sogeti.automation.framework.constants;
 import com.sogeti.automation.framework.utils.PropertyReader;
 
 public class AppConstants {
+    public static String INTERFACE_TYPE = null;
+
+    static {
+        try {
+            INTERFACE_TYPE = PropertyReader.getFieldValue("InterfaceType");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static class Web {
         public static String UI_BASE_URL = null;
@@ -51,6 +60,10 @@ public class AppConstants {
         public static String API_AUTHORIZATION_CODE = null;
         public static String API_CODE_CHALLENGE = null;
         public static String API_CODE_CHALLENGE_METHOD = null;
+
+        public static String GITHUB_USER_URL = "/users/";
+        public static String GITHUB_USER_REPOS = "/user/repos";
+        public static String GITHUB_REPOS = "/repos/";
 
         public enum AuthenticationType {
             Basic,
