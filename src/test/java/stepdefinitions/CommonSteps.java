@@ -2,11 +2,13 @@ package stepdefinitions;
 
 import com.sogeti.automation.framework.basetest.TestClass;
 import com.sogeti.automation.framework.basetest.TestContext;
+import com.sogeti.automation.framework.constants.AppConstants;
 import com.sogeti.automation.test.pageFactory.PageClass;
-import io.cucumber.core.gherkin.Step;
-import io.cucumber.java.*;
+import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import org.apache.logging.log4j.ThreadContext;
-import org.testng.annotations.AfterSuite;
 
 public class CommonSteps extends TestClass {
     TestContext testContext;
@@ -14,7 +16,9 @@ public class CommonSteps extends TestClass {
 
     public CommonSteps(TestContext context) throws Exception {
         this.testContext = context;
-        pageClass = testContext.getPageObjectManager().getCommonPage();
+        if (AppConstants.INTERFACE_TYPE.equalsIgnoreCase("Web"))
+            pageClass = testContext.getPageObjectManager().getCommonPage();
+
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
     }
@@ -26,12 +30,17 @@ public class CommonSteps extends TestClass {
 
     @After
     public void tearDown(Scenario name) {
-        testContext.getDriver().quit();
+        if (pageClass != null)
+            testContext.getDriver().quit();
+
         log.info("Execution status is: " + name.getStatus());
     }
 
+
     @AfterStep
     public void addScreenshot(Scenario name) {
-        pageClass.takeScreenshot(name);
+        if (pageClass != null && testContext.getDriver() != null)
+            pageClass.takeScreenshot(name);
     }
+
 }
