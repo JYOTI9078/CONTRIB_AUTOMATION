@@ -1,10 +1,8 @@
 package com.sogeti.automation.framework.basetest;
 
 import com.sogeti.automation.framework.constants.AppConstants;
-import com.sogeti.automation.framework.constants.FrameworkConstants;
 import com.sogeti.automation.framework.driver.GlobalDriver;
 import com.sogeti.automation.framework.driver.TestListener;
-import com.sogeti.automation.framework.utils.ExcelReader;
 import com.sogeti.automation.framework.utils.Logging;
 import com.sogeti.automation.framework.utils.PropertyReader;
 import org.apache.logging.log4j.ThreadContext;
@@ -44,6 +42,7 @@ public class TestClass {
     public WebDriver setupEnvironment(String browser) {
         this.testURL = AppConstants.Web.UI_BASE_URL;
         gDriver = new GlobalDriver();
+        this.log.info("Initializing web driver");
         driver = gDriver.init(browser);
         driver.get(testURL);
 

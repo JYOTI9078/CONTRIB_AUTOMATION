@@ -300,7 +300,7 @@ for more details.
     - [x] Multi-browser support
     - [ ] Browserstack/Saucelabs integration
 - [x] API Automation
-    - [ ] API authentication support
+    - [x] API authentication support
 - [ ] Mobile Automation
     - [ ] Android - Browsers
     - [ ] Android - App
