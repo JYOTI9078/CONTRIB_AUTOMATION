@@ -12,6 +12,6 @@ Feature: UI Tests - Demo Feature
       | Product                   | Price    |
       | Sauce Labs Bolt T-Shirt   | $15.99   |
       | Sauce Labs Fleece Jacket  | $49.99   |
-      | Sauce Labs Backpack       | $29.99   |
+      | Sauce Labs Backpack       | $50.00   |
       | Sauce Labs Bike Light     | $9.99    |
-#      | Sauce Labs Bolt Jeans     | $15.99   |
+      | Sauce Labs Bolt Jeans     | $15.99   |
