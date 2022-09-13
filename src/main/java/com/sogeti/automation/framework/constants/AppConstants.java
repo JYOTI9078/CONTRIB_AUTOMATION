@@ -5,7 +5,6 @@ import com.sogeti.automation.framework.utils.PropertyReader;
 
 public class AppConstants {
 
-    Logging log = new Logging(this.getClass().getName());
     public static String INTERFACE_TYPE = null;
 
     static {
