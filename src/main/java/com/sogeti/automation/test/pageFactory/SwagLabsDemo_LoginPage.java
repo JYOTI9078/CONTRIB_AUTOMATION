@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class SwagLabsDemoPage extends PageClass {
+public class SwagLabsDemo_LoginPage extends PageClass {
 
     @FindBy(id = "user-name")
     private WebElement txtUserName;
@@ -21,7 +21,7 @@ public class SwagLabsDemoPage extends PageClass {
     @FindBy(id = "login-button")
     private WebElement btnLogin;
 
-    public SwagLabsDemoPage(WebDriver driver) {
+    public SwagLabsDemo_LoginPage(WebDriver driver) {
         super(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MediumWait));
         PageFactory.initElements(driver, this);
