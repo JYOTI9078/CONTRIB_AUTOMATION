@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class WebUtils {
 
@@ -68,5 +69,27 @@ public class WebUtils {
             log.error("Error occurred while opening new tab. " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    protected WebElement getWebLocator(String elementToken, String replacement) {
+        elementToken = elementToken.replaceAll("\\$\\{.+\\}", replacement);
+        return _driver.findElement(By.xpath(elementToken));
+    }
+
+    protected WebElement getWebLocator(String elementToken, String replacement, int row) {
+        elementToken = elementToken.replaceAll("\\$\\{.+\\}", replacement);
+        elementToken = elementToken + "[" + row + "]";
+        return _driver.findElement(By.xpath(elementToken));
+    }
+
+    protected List<WebElement> getWebLocatorList(String elementToken, String replacement) {
+        elementToken = elementToken.replaceAll("\\$\\{.+\\}", replacement);
+        return _driver.findElements(By.xpath(elementToken));
+    }
+
+    protected List<WebElement> getWebLocatorList(String elementToken, String replacement, int row) {
+        elementToken = elementToken.replaceAll("\\$\\{.+\\}", replacement);
+        elementToken = elementToken + "[" + row + "]";
+        return _driver.findElements(By.xpath(elementToken));
     }
 }
