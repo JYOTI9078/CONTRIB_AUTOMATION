@@ -1,8 +1,11 @@
 package com.sogeti.automation.framework.constants;
 
+import com.sogeti.automation.framework.utils.Logging;
 import com.sogeti.automation.framework.utils.PropertyReader;
 
 public class AppConstants {
+
+    Logging log = new Logging(this.getClass().getName());
     public static String INTERFACE_TYPE = null;
 
     static {
@@ -17,6 +20,8 @@ public class AppConstants {
         public static String UI_BASE_URL = null;
         public static String GRID_HUB_URL = null;
         public static String GRIP_HUB_PORT = null;
+        public static String UI_USERNAME = null;
+        public static String UI_PASSWORD = null;
 
         static {
             try {
@@ -38,6 +43,22 @@ public class AppConstants {
             try {
                 GRID_HUB_URL = "http://" + PropertyReader.getFieldValue("GRID_HUB_IP") + ":" +
                         GRIP_HUB_PORT + "/wd/hub";
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        static {
+            try {
+                UI_USERNAME = PropertyReader.getFieldValue("UI_USERNAME");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        static {
+            try {
+                UI_PASSWORD = PropertyReader.getFieldValue("UI_PASSWORD");
             } catch (Exception e) {
                 e.printStackTrace();
             }
