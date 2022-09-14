@@ -1,5 +1,6 @@
 package com.sogeti.automation.framework.driver;
 
+import com.epam.healenium.SelfHealingDriver;
 import com.sogeti.automation.framework.constants.AppConstants;
 import com.sogeti.automation.framework.constants.FrameworkConstants;
 import com.sogeti.automation.framework.utils.Logging;
@@ -30,6 +31,7 @@ public class GlobalDriver {
     private String _headless = "false";
     private String executionServer = null;
     private WebDriver _ldriver = null;
+    private SelfHealingDriver _sDriver = null;
     private Logging log = new Logging(GlobalDriver.class.getName());
     private String defaultDownloadPath = null;
 
@@ -73,7 +75,8 @@ public class GlobalDriver {
                         .remoteAddress(AppConstants.Web.GRID_HUB_URL)
                         .create();
             } else {
-                _ldriver = new ChromeDriver(setChromeOptions());
+                WebDriver delegate = new ChromeDriver(setChromeOptions());
+                _sDriver = SelfHealingDriver.create(delegate);
             }
         }
         else if (browserName.equalsIgnoreCase("firefox")) {
