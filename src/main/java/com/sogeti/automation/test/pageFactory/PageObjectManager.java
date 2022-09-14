@@ -1,15 +1,16 @@
 package com.sogeti.automation.test.pageFactory;
 
+import com.epam.healenium.SelfHealingDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class PageObjectManager {
-    WebDriver gDriver;
+    SelfHealingDriver gDriver;
     PageClass pageClass;
     SwagLabsDemo_LoginPage swagLabsDemoLoginPage;
     SwagLabsDemo_ProductsPage swagLabsDemo_productsPage;
 
-    public PageObjectManager(WebDriver driver) {
+    public PageObjectManager(SelfHealingDriver driver) {
         this.gDriver = driver;
         PageFactory.initElements(driver, this);
     }

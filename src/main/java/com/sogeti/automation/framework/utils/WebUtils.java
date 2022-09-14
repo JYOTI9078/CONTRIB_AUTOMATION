@@ -1,5 +1,6 @@
 package com.sogeti.automation.framework.utils;
 
+import com.epam.healenium.SelfHealingDriver;
 import com.sogeti.automation.framework.constants.FrameworkConstants;
 import io.cucumber.java.Scenario;
 import org.apache.logging.log4j.ThreadContext;
@@ -12,12 +13,12 @@ import java.util.List;
 
 public class WebUtils {
 
-    protected WebDriver _driver;
+    protected SelfHealingDriver _driver;
     protected WebDriverWait wait;
 
     protected Logging log = new Logging(this.getClass().getName());
 
-    public WebUtils(WebDriver driver) {
+    public WebUtils(SelfHealingDriver driver) {
         this._driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MediumWait));
 //        log.info("Class " + this.getClass().getName() + " initiated");

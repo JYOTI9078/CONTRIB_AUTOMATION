@@ -1,5 +1,6 @@
 package com.sogeti.automation.test.pageFactory;
 
+import com.epam.healenium.SelfHealingDriver;
 import com.sogeti.automation.framework.constants.FrameworkConstants;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,7 @@ public class SwagLabsDemo_ProductsPage extends PageClass {
     private String productName = "//div[text()='${labelName}']";
     private String productPrice = "//div[text()='${labelName}']/ancestor::div[@class='inventory_item_label']/following-sibling::div[@class='pricebar']/div[@class='inventory_item_price']";
 
-    public SwagLabsDemo_ProductsPage(WebDriver driver) {
+    public SwagLabsDemo_ProductsPage(SelfHealingDriver driver) {
         super(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MediumWait));
         PageFactory.initElements(driver, this);
