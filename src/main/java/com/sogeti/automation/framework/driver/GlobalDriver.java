@@ -27,7 +27,7 @@ import java.util.Map;
 public class GlobalDriver {
 
     private String browserName;
-    private String _headless = null;
+    private String _headless = "false";
     private String executionServer = null;
     private WebDriver _ldriver = null;
     private Logging log = new Logging(GlobalDriver.class.getName());
@@ -138,7 +138,8 @@ public class GlobalDriver {
         options.addArguments("start-maximized");
         options.addArguments("--use-fake-ui-for-media-stream=1");
         if (_headless.equalsIgnoreCase("true"))
-            options.addArguments("--headless");
+            options.setHeadless(true);
+//            options.addArguments("--headless");
 
         return options;
     }
@@ -184,7 +185,8 @@ public class GlobalDriver {
         options.addArguments("start-maximized");
         options.addArguments("--use-fake-ui-for-media-stream=1");
         if (_headless.equalsIgnoreCase("true"))
-            options.addArguments("--headless");
+            options.setHeadless(true);
+//            options.addArguments("--headless");
 
         return options;
     }
