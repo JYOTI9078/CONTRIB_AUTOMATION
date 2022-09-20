@@ -1,29 +1,33 @@
 package com.sogeti.automation.test.pageFactory;
 
 import com.epam.healenium.SelfHealingDriver;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class PageObjectManager {
-    SelfHealingDriver gDriver;
+    SelfHealingDriver healingDriver;
     PageClass pageClass;
     SwagLabsDemo_LoginPage swagLabsDemoLoginPage;
     SwagLabsDemo_ProductsPage swagLabsDemo_productsPage;
+    HealeniumDemoPage healeniumDemoPage;
 
     public PageObjectManager(SelfHealingDriver driver) {
-        this.gDriver = driver;
+        this.healingDriver = driver;
         PageFactory.initElements(driver, this);
     }
 
     public PageClass getCommonPage() {
-        return(pageClass == null) ? pageClass = new PageClass(gDriver) : pageClass;
+        return((pageClass == null) ? pageClass = new PageClass(healingDriver) : pageClass);
     }
 
     public SwagLabsDemo_LoginPage getSwagLabsDemo_LoginPage() {
-        return (swagLabsDemoLoginPage == null) ? swagLabsDemoLoginPage = new SwagLabsDemo_LoginPage(gDriver) : swagLabsDemoLoginPage;
+        return (swagLabsDemoLoginPage == null) ? swagLabsDemoLoginPage = new SwagLabsDemo_LoginPage(healingDriver) : swagLabsDemoLoginPage;
     }
 
     public SwagLabsDemo_ProductsPage getSwagLabsDemo_ProductsPage() {
-        return (swagLabsDemo_productsPage == null) ? swagLabsDemo_productsPage = new SwagLabsDemo_ProductsPage(gDriver) : swagLabsDemo_productsPage;
+        return (swagLabsDemo_productsPage == null) ? swagLabsDemo_productsPage = new SwagLabsDemo_ProductsPage(healingDriver) : swagLabsDemo_productsPage;
+    }
+
+    public HealeniumDemoPage getHealeniumDemoPage() {
+        return (healeniumDemoPage == null) ? healeniumDemoPage = new HealeniumDemoPage(healingDriver) : healeniumDemoPage;
     }
 }

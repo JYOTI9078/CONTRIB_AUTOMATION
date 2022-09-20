@@ -13,27 +13,32 @@ import java.util.List;
 
 public class WebUtils {
 
-    protected SelfHealingDriver _driver;
+    protected SelfHealingDriver _hDriver;
     protected WebDriverWait wait;
 
     protected Logging log = new Logging(this.getClass().getName());
 
     public WebUtils(SelfHealingDriver driver) {
-        this._driver = driver;
+        this._hDriver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MediumWait));
-//        log.info("Class " + this.getClass().getName() + " initiated");
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
         PageFactory.initElements(driver, this);
     }
 
     public void refreshPage() {
-        this._driver.navigate().refresh();
+        this._hDriver.navigate().refresh();
+    }
+
+    public String getPageTitle() {
+        return _hDriver.getTitle();
     }
 
     public void takeScreenshot(Scenario name) {
+        final byte[] screenshot;
+
         try {
-            final byte[] screenshot = ((TakesScreenshot) _driver).getScreenshotAs(OutputType.BYTES);
+            screenshot = ((TakesScreenshot) _hDriver.getDelegate()).getScreenshotAs(OutputType.BYTES);
             name.attach(screenshot, "image/png", name.getName());
         } catch (Exception e) {
             log.error("Could not capture screenshot. " + e.getMessage());
@@ -42,15 +47,22 @@ public class WebUtils {
     }
 
     public void takeScreenshotForFailedTestCases(Scenario name) {
+        final byte[] screenshot;
+
         if (name.isFailed()) {
-            final byte[] screenshot = ((TakesScreenshot) _driver).getScreenshotAs(OutputType.BYTES);
-            name.attach(screenshot, "image/png", name.getName());
+            try {
+                screenshot = ((TakesScreenshot) _hDriver.getDelegate()).getScreenshotAs(OutputType.BYTES);
+                name.attach(screenshot, "image/png", name.getName());
+            } catch (Exception e) {
+                log.error("Could not capture screenshot. " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
     public void closeWindow() {
         try {
-            this._driver.close();
+            this._hDriver.close();
             log.info("Current window has been closed.");
         } catch (Exception e) {
             log.error("Current window could not be closed. " + e.getMessage());
@@ -61,7 +73,7 @@ public class WebUtils {
     public void launchUrlInNewTab(String url) {
         try {
             String link = "window.open('" + url + "');";
-            ((JavascriptExecutor) _driver).executeScript(link);
+            ((JavascriptExecutor) _hDriver).executeScript(link);
             log.info("Open new tab by pressing Ctrl+T");
         } catch (NoSuchWindowException ns) {
             log.error("No window exist. " + ns.getMessage());
@@ -74,23 +86,27 @@ public class WebUtils {
 
     protected WebElement getWebLocator(String elementToken, String replacement) {
         elementToken = elementToken.replaceAll("\\$\\{.+\\}", replacement);
-        return _driver.findElement(By.xpath(elementToken));
+
+        return _hDriver.findElement(By.xpath(elementToken));
     }
 
     protected WebElement getWebLocator(String elementToken, String replacement, int row) {
         elementToken = elementToken.replaceAll("\\$\\{.+\\}", replacement);
         elementToken = elementToken + "[" + row + "]";
-        return _driver.findElement(By.xpath(elementToken));
+
+        return _hDriver.findElement(By.xpath(elementToken));
     }
 
     protected List<WebElement> getWebLocatorList(String elementToken, String replacement) {
         elementToken = elementToken.replaceAll("\\$\\{.+\\}", replacement);
-        return _driver.findElements(By.xpath(elementToken));
+
+        return _hDriver.findElements(By.xpath(elementToken));
     }
 
     protected List<WebElement> getWebLocatorList(String elementToken, String replacement, int row) {
         elementToken = elementToken.replaceAll("\\$\\{.+\\}", replacement);
         elementToken = elementToken + "[" + row + "]";
-        return _driver.findElements(By.xpath(elementToken));
+
+        return _hDriver.findElements(By.xpath(elementToken));
     }
 }
