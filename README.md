@@ -12,8 +12,13 @@
     <li><a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#folder-structure">Folder Structure</a></li>
+      </ul>
+    </li>
+    <li><a href="#framework-installation-setup">Framework Installation & Setup</a>
+      <ul>
         <li><a href="#pre-requisites">Pre-requisites</a></li>
         <li><a href="#setup">Setup</a></li>
+        <li><a href="#self-healing">Self-Healing</a></li>
         <li><a href="#writing-your-first-test-scenario">Writing your first test scenario</a> </li>
       </ul>
     </li>
@@ -48,7 +53,7 @@ Scenario Outline: Verify the login functionality
        | user1      | pwd123    |
 ```
 This framework also has a rich pre-built library of utilities that lets you start developing test scripts and
-executing those right from day-1.
+executing those right from day 1.
 
 ## Getting Started
 
@@ -59,33 +64,40 @@ Please refer the structure to understand how the packages and files are organize
 
 ```
 pom.xml                             # For managing maven dependencies, build management and commandline arguments for runtime 
-input-data                          # All the test-data files created by testers should be put here    
-src
-└───main
-│   └───java                    
-│   │   └───basetest           ┐
-│   │   └───constants          ├    # Framework packages which are maintained by the CoE team
-│   │   └───driver             ┘
-│   │   └───pageFactory             # Add all your page classes in this package
+input-data/                         # All the test-data files created by testers should be put here    
+infra/                          ┐
+└───db/                         │
+│   └───sql/                    ├   # These files are required for configuring and starting docker for Healenium
+│       └───init.sql            │
+└───docker-compose.yaml         ┘
+src/
+└───main/
+│   └───java/                    
+│   │   └───basetest/          ┐
+│   │   └───constants/         ├    # Framework packages which are maintained by the CoE team
+│   │   └───driver/            ┘
+│   │   └───pageFactory/            # Add all your page classes in this package
 │   │   │   └───PageClass           # Default page class which MUST BE extended by every page-object class in the test project
 │   │   │   └───PageObjectManager   # For creating and managing objects of every page class.
-│   │   └───utils                   # Various utility libraries which can be used by both framework developers and testers
-│   └───resources
+│   │   └───utils/                  # Various utility libraries which can be used by both framework developers and testers
+│   └───resources/
 │       └───log4j2.xml
-└───test                     
-    └───java
-    │   └───runner                  
+└───test/                     
+    └───java/
+    │   └───runner/                  
     │   │   └───TestRunner          # Main Runner class for this cucumber framework. Used for running tests locally
-    │   └───stepdefinitions         # Add all your step-definition classes here
+    │   └───stepdefinitions/        # Add all your step-definition classes here
     │       └───CommonSteps         # A step-definition class for performing common actions such before and after test tasks etc.
-    └───resources
-        └───Configs                 # All the project configurations are maintained here. Create as many required for each environment of your project
+    └───resources/
+        └───Configs/                # All the project configurations are maintained here. Create as many required for each environment of your project
         │   └───qa.properties       
         │   └───dev.properties      
-        └───Features                # All feature files consisting of test scenarios are kept in this folder.
-logs                                # Metric and execution logs displayed here
-target                              # Execution results will be shown under this folder
-└───cucumber-html-reports           # HTML reports will be created under this folder
+        └───Features/               # All feature files consisting of test scenarios are kept in this folder.
+        └───cucumber.properties
+        └───healenium.properties    # Self-healing can be enabled from here, along with other Healenium properties.
+logs/                               # Metric and execution logs displayed here
+target/                             # Execution results will be shown under this folder
+└───cucumber-html-reports/          # HTML reports will be created under this folder
     └───overview-features.html      # Look for this file to open and view the execution reports.
 README.md
 Contributing.md
@@ -120,13 +132,17 @@ src/test/java/runner/TestRunner.java
 
 ### Pre-requisites
 
-- Install [Java 1.8][java-1.8]
+- Install [Java 1.8][java-1.8] or above
 - Install [Maven][maven]
 - Set Java and Maven in the [classpath][classpath]
 - Install [Git][git] and clone this repository
 - Install [IntelliJ Idea][intellij] (preferred) or any other compatible IDE
 - Install all recommended [IntelliJ plugins][intellij-plugins]. Install the corresponding plugins if you're using any
   other IDE.
+- Docker for Self-Healing _(optional)_: Healenium requires Docker for execution. If you wish to enable self-healing
+features, make sure that Docker is installed in your test environment. 
+<br/>Ignore this step, if you don't have docker setup in test environment, or do not wish to use self-heal features.
+_[Install Docker Desktop on Windows][docker-install]_
 
 ### Setup
 
@@ -152,7 +168,7 @@ src/test/java/runner/TestRunner.java
 - If you wish to execute the test cases in any other environment such as dev or staging, then clone the qa.properties
   file, rename it appropriately, and update all the values corresponding to your new environment.
   Correspondingly, set the value of `envName` in pom.xml to the same name.
-- For running your tests in **Headless Mode**, set the value of `healessMode` to _true_.
+- For running your tests in [Headless Mode][headless-mode], set the value of `healessMode` to _true_.
 
 ```
 <plugin>
@@ -163,6 +179,10 @@ src/test/java/runner/TestRunner.java
             ...
             <headlessMode>true</headlessMode>
 ```
+
+### Self-Healing
+
+
 
 ### Writing your first test scenario
 
@@ -351,3 +371,4 @@ For further information, inquiries and support, please reach out to QE&T Automat
 [webdrivermanager]: https://bonigarcia.dev/webdrivermanager/
 [headless-mode]: https://smartbear.com/blog/selenium-tests-headless/
 [maven-arguments]: https://books.sonatype.com/mvnref-book/reference/running-sect-options.html
+[docker-install]: https://docs.docker.com/desktop/install/windows-install/
