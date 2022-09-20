@@ -8,7 +8,7 @@ public class PageObjectManager {
     PageClass pageClass;
     SwagLabsDemo_LoginPage swagLabsDemoLoginPage;
     SwagLabsDemo_ProductsPage swagLabsDemo_productsPage;
-    HealeniumDemoPage healeniumDemoPage;
+    SelfHealDemoPage selfHealDemoPage;
 
     public PageObjectManager(SelfHealingDriver driver) {
         this.healingDriver = driver;
@@ -27,7 +27,7 @@ public class PageObjectManager {
         return (swagLabsDemo_productsPage == null) ? swagLabsDemo_productsPage = new SwagLabsDemo_ProductsPage(healingDriver) : swagLabsDemo_productsPage;
     }
 
-    public HealeniumDemoPage getHealeniumDemoPage() {
-        return (healeniumDemoPage == null) ? healeniumDemoPage = new HealeniumDemoPage(healingDriver) : healeniumDemoPage;
+    public SelfHealDemoPage getSelfHealDemoPage() {
+        return (selfHealDemoPage == null) ? selfHealDemoPage = new SelfHealDemoPage(healingDriver) : selfHealDemoPage;
     }
 }

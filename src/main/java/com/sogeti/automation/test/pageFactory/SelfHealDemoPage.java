@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class HealeniumDemoPage extends PageClass{
+public class SelfHealDemoPage extends PageClass{
 
     @FindBy(xpath = "//input[@type='text'][@placeholder='Name']")
     private WebElement firstName;
@@ -33,34 +33,34 @@ public class HealeniumDemoPage extends PageClass{
     @FindBy(xpath = "//p[contains(@class,'rule-error-req')]")
     private WebElement msgError;
 
-    public HealeniumDemoPage(SelfHealingDriver driver) {
+    public SelfHealDemoPage(SelfHealingDriver driver) {
         super(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MediumWait));
         PageFactory.initElements(driver, this);
     }
 
-    public HealeniumDemoPage enterFirstName(String firstName) {
+    public SelfHealDemoPage enterFirstName(String firstName) {
         this.firstName.clear();
         this.firstName.sendKeys(firstName);
         log.info("Entered first name");
         return this;
     }
 
-    public HealeniumDemoPage enterLastName(String surname) {
+    public SelfHealDemoPage enterLastName(String surname) {
         this.lastName.clear();
         this.lastName.sendKeys(surname);
         log.info("Entered last name");
         return this;
     }
 
-    public HealeniumDemoPage enterMobile(String mobile) {
+    public SelfHealDemoPage enterMobile(String mobile) {
         this.mobile.clear();
         this.mobile.sendKeys(mobile);
         log.info("Entered mobile number");
         return this;
     }
 
-    public HealeniumDemoPage enterEmail(String emailId) {
+    public SelfHealDemoPage enterEmail(String emailId) {
         this.email.clear();
         this.email.sendKeys(emailId);
         log.info("Entered e-mail id");
