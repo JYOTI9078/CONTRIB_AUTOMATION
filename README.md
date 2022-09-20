@@ -182,6 +182,34 @@ _[Install Docker Desktop on Windows][docker-install]_
 
 ### Self-Healing
 
+To configure self-healing, set the properties in `src/test/resources/healenium.properties`
+- **heal-enabled** is the flag to enable or disable healing. The accepted values are true and false
+- **score-cap** is the score value to enable healing with predefined probability of match (0.5 means that healing 
+will be performed for new healed locators where probability of match with target one is >=50% )
+- **recovery-tries** is the number of times the algorithm will try to find a matching locator
+- **hlm.server.url** is the ip:port or URL where hlm-backend instance is installed. _**Leave this value unchanged_
+- **hlm.imitator.url** is the ip:port or URL where imitate instance is installed. _**Leave this value unchanged_
+
+After enabling self-healing in `healenium.properties`, start the healenium-backend:
+1. Make sure Docker Desktop is up and running in your test environment.
+2. Start a CMD/Terminal in the Litmus project folder and run the following commands:
+```
+> cd infra
+> docker-compose up -d
+> cd..
+```
+3. After this, follow the instructions to <a href="#writing-your-first-test-scenario">write your test scenarios</a>
+and <a href="#execution">execute</a>.
+4. To stop the healenium-backend after your tests are executed, run the following commands:
+```
+> cd infra
+> docker-compose down
+> cd..
+```
+
+Self-healing requires that the tests are run at least once with the correct locators in order to set the baseline.
+After the first run, healenium will be able to use its machine-learning algorithm to identify changes in locators in 
+subsequent test runs.
 
 
 ### Writing your first test scenario
@@ -305,6 +333,7 @@ for more details.
 - [Parallel execution][parallel-execution] using Cucumber
 - Know more about [Cucumber HTML Reports][cucumber-reporting]
 - How to configure Cucumber HTML Report in [Jenkins][cucumber-report-jenkins]
+- Learn more about [Healenium][healenium] and follow its [Github][healenium-github] page for documentation
 
 ## Roadmap
 - [x] Base framework
@@ -372,3 +401,5 @@ For further information, inquiries and support, please reach out to QE&T Automat
 [headless-mode]: https://smartbear.com/blog/selenium-tests-headless/
 [maven-arguments]: https://books.sonatype.com/mvnref-book/reference/running-sect-options.html
 [docker-install]: https://docs.docker.com/desktop/install/windows-install/
+[healenium]: https://www.automatetheplanet.com/healenium-self-healing-tests/
+[healenium-github]: https://github.com/healenium/healenium-web
