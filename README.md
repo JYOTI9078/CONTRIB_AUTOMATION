@@ -298,6 +298,7 @@ for more details.
     - [x] Local execution
     - [x] Grid execution
     - [x] Multi-browser support
+    - [x] Self-heal capabilities
     - [ ] Browserstack/Saucelabs integration
 - [x] API Automation
     - [x] API authentication support
