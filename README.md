@@ -19,9 +19,9 @@
         <li><a href="#pre-requisites">Pre-requisites</a></li>
         <li><a href="#setup">Setup</a></li>
         <li><a href="#self-healing">Self-Healing</a></li>
-        <li><a href="#writing-your-first-test-scenario">Writing your first test scenario</a> </li>
       </ul>
     </li>
+    <li><a href="#writing-your-first-test-scenario">Writing your first test scenario</a> </li>
     <li><a href="#execution">Execution</a>
       <ul>
         <li><a href="#local-execution">Local Execution</a></li>
@@ -81,7 +81,7 @@ src/
 │   │   │   └───PageObjectManager   # For creating and managing objects of every page class.
 │   │   └───utils/                  # Various utility libraries which can be used by both framework developers and testers
 │   └───resources/
-│       └───log4j2.xml
+│       └───log4j2.xml              # Configuration for logging
 └───test/                     
     └───java/
     │   └───runner/                  
@@ -212,7 +212,7 @@ After the first run, healenium will be able to use its machine-learning algorith
 subsequent test runs.
 
 
-### Writing your first test scenario
+## Writing your first test scenario
 
 Once the framework installation and setup is complete, you are now ready to start writing your test scripts.
 
@@ -376,7 +376,7 @@ To contribute to this repository, please see the [contribution guidelines](CONTR
 
 ## Contact
 
-For further information, inquiries and support, please reach out to QE&T Automation CoE - [DL IN Sogeti Test Automation COE](sogetitestautomationcoe.in@capgemini.com).
+For further information, inquiries and support, please reach out to **QE&T Automation CoE** - [DL IN Sogeti Test Automation COE](sogetitestautomationcoe.in@capgemini.com).
 
 
 <!-- reference urls -->
