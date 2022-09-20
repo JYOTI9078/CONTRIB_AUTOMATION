@@ -1,6 +1,5 @@
 package com.sogeti.automation.framework.constants;
 
-import com.sogeti.automation.framework.utils.Logging;
 import com.sogeti.automation.framework.utils.PropertyReader;
 
 public class AppConstants {

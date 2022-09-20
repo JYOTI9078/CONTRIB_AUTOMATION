@@ -17,6 +17,7 @@ Screenshot/
 *.tar
 *.zip
 *.gzip
+*.iml
 
 # Logs and databases
 *.log
