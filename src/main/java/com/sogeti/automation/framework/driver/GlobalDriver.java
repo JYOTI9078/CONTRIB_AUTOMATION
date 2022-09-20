@@ -51,7 +51,8 @@ public class GlobalDriver {
         return defaultDownloadPath;
     }
 
-    public WebDriver init(String browser) {
+    public SelfHealingDriver init(String browser) {
+        WebDriver delegate = null;
         setDownloadPath();
         if (browser == null) {
             browserName = PropertyReader.getFieldValue("TestBrowser");
@@ -65,46 +66,57 @@ public class GlobalDriver {
         ThreadContext.push(executionServer.toUpperCase());
         ThreadContext.push(browserName.toUpperCase());
 
-        if (browserName.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().clearResolutionCache().setup();
+        switch (browserName.toLowerCase()) {
+            case "chrome":
+                WebDriverManager.chromedriver().clearResolutionCache().setup();
 
-            if (executionServer.equalsIgnoreCase("remote")) {
-                Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
-                _ldriver = WebDriverManager.chromedriver()
-                        .capabilities(setChromeOptions())
-                        .remoteAddress(AppConstants.Web.GRID_HUB_URL)
-                        .create();
-            } else {
-                WebDriver delegate = new ChromeDriver(setChromeOptions());
-                _sDriver = SelfHealingDriver.create(delegate);
-            }
-        }
-        else if (browserName.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().clearResolutionCache().setup();
+                if (executionServer.equalsIgnoreCase("remote")) {
+                    Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
 
-            if (executionServer.equalsIgnoreCase("remote")) {
-                Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
-                _ldriver = WebDriverManager.firefoxdriver()
-                        .capabilities(setFirefoxOptions())
-                        .remoteAddress(AppConstants.Web.GRID_HUB_URL)
-                        .create();
-            } else {
-                _ldriver = new FirefoxDriver(setFirefoxOptions());
-            }
-        }
-        else if (browserName.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().clearResolutionCache().setup();
+                    delegate = _ldriver = WebDriverManager.chromedriver()
+                            .capabilities(setChromeOptions())
+                            .remoteAddress(AppConstants.Web.GRID_HUB_URL)
+                            .create();
+                } else {
+                    delegate = new ChromeDriver(setChromeOptions());
+                }
+                break;
 
-            if (executionServer.equalsIgnoreCase("remote")) {
-                Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
-                _ldriver = WebDriverManager.edgedriver()
-                        .capabilities(setEdgeOptions())
-                        .remoteAddress(AppConstants.Web.GRID_HUB_URL)
-                        .create();
-            } else {
-                _ldriver = new EdgeDriver(setEdgeOptions());
-            }
+            case "firefox":
+                WebDriverManager.firefoxdriver().clearResolutionCache().setup();
+
+                if (executionServer.equalsIgnoreCase("remote")) {
+                    Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
+
+                    delegate = WebDriverManager.firefoxdriver()
+                            .capabilities(setFirefoxOptions())
+                            .remoteAddress(AppConstants.Web.GRID_HUB_URL)
+                            .create();
+                } else {
+                    delegate = new FirefoxDriver(setFirefoxOptions());
+                }
+                break;
+
+            case "edge":
+                WebDriverManager.edgedriver().clearResolutionCache().setup();
+
+                if (executionServer.equalsIgnoreCase("remote")) {
+                    Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
+
+                    delegate = WebDriverManager.edgedriver()
+                            .capabilities(setEdgeOptions())
+                            .remoteAddress(AppConstants.Web.GRID_HUB_URL)
+                            .create();
+                } else {
+                    delegate = new EdgeDriver(setEdgeOptions());
+                }
+                break;
         }
+
+        _sDriver = SelfHealingDriver.create(delegate);
+        _sDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(FrameworkConstants.SmallWait));
+        _sDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(FrameworkConstants.LargeWait));
+        _sDriver.manage().window().maximize();
 
         WebDriverListener listener = new WebDriverListener() {
             @Override
@@ -112,15 +124,12 @@ public class GlobalDriver {
                 WebDriverListener.super.beforeClick(element);
             }
         };
-        WebDriver driver = new EventFiringDecorator(listener).decorate(_ldriver);
+        WebDriver driver = new EventFiringDecorator(listener).decorate(_sDriver);
 
 
         log.info("New driver instantiated.");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(FrameworkConstants.SmallWait));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(FrameworkConstants.LargeWait));
-        driver.manage().window().maximize();
 
-        return _ldriver;
+        return _sDriver;
     }
 
     private ChromeOptions setChromeOptions() {
@@ -142,7 +151,6 @@ public class GlobalDriver {
         options.addArguments("--use-fake-ui-for-media-stream=1");
         if (_headless.equalsIgnoreCase("true"))
             options.setHeadless(true);
-//            options.addArguments("--headless");
 
         return options;
     }
@@ -189,7 +197,6 @@ public class GlobalDriver {
         options.addArguments("--use-fake-ui-for-media-stream=1");
         if (_headless.equalsIgnoreCase("true"))
             options.setHeadless(true);
-//            options.addArguments("--headless");
 
         return options;
     }
