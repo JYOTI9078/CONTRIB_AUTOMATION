@@ -5,10 +5,19 @@ import com.sogeti.automation.framework.utils.PropertyReader;
 public class AppConstants {
 
     public static String INTERFACE_TYPE = null;
+    public static String AZURE_KEYVAULT_URL;
 
     static {
         try {
             INTERFACE_TYPE = PropertyReader.getFieldValue("InterfaceType");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static {
+        try {
+            AZURE_KEYVAULT_URL = PropertyReader.getFieldValue("AZURE_KEYVAULT_URL");
         } catch (Exception e) {
             e.printStackTrace();
         }
