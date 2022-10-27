@@ -9,6 +9,10 @@ public class AppConstants {
     public static final String DEFAULT_DOWNLOAD_PATH = PropertyReader.getFieldValue("DefaultDownloadPath");
     public static final String AZURE_KEYVAULT_URL = PropertyReader.getFieldValue("AZURE_KEYVAULT_URL");
 
+    private AppConstants() {
+        throw new IllegalStateException("Constants class");
+    }
+
     public static class Web {
         public static final String TEST_BROWSER = PropertyReader.getFieldValue("TestBrowser");
         public static final String UI_BASE_URL = PropertyReader.getFieldValue("UI_BASE_URL");
@@ -18,6 +22,10 @@ public class AppConstants {
         public static final String UI_USERNAME = PropertyReader.getFieldValue("UI_USERNAME");
         public static final String UI_PASSWORD = PropertyReader.getFieldValue("UI_PASSWORD");
         public static final String SCREENSHOT_ENABLE = PropertyReader.getFieldValue("ScreenshotEnable");
+
+        private Web() {
+            throw new IllegalStateException("Web Constants class");
+        }
     }
 
     public static class Api {
@@ -39,6 +47,10 @@ public class AppConstants {
         public static final String GITHUB_USER_URL = "/users/";
         public static final String GITHUB_USER_REPOS = "/user/repos";
         public static final String GITHUB_REPOS = "/repos/";
+
+        private Api() {
+            throw new IllegalStateException("API Constants class");
+        }
 
         public enum AuthenticationType {
             BASIC,
