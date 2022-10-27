@@ -21,7 +21,7 @@ public class SwagLabsDemo_ProductsPage extends PageClass {
 
     public SwagLabsDemo_ProductsPage(SelfHealingDriver driver) {
         super(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MediumWait));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MEDIUM_WAIT));
         PageFactory.initElements(driver, this);
     }
 

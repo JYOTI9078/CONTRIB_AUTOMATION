@@ -35,7 +35,7 @@ public class SelfHealDemoPage extends PageClass{
 
     public SelfHealDemoPage(SelfHealingDriver driver) {
         super(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MediumWait));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MEDIUM_WAIT));
         PageFactory.initElements(driver, this);
     }
 

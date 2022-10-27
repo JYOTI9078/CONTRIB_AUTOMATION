@@ -20,7 +20,7 @@ public class WebUtils {
 
     public WebUtils(SelfHealingDriver driver) {
         this._hDriver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MediumWait));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MEDIUM_WAIT));
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
         PageFactory.initElements(driver, this);

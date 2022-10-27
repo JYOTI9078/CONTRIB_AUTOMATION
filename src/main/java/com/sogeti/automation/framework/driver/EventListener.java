@@ -20,9 +20,9 @@ public class EventListener extends AbstractWebDriverEventListener {
 
     @Override
     public void beforeClickOn(WebElement element, WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.LargeWait));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.LARGE_WAIT));
         long tStart = System.currentTimeMillis();
-        long maxWaitSeconds = FrameworkConstants.LargeWait;
+        long maxWaitSeconds = FrameworkConstants.LARGE_WAIT;
 
         while (true) {
             try {
@@ -31,7 +31,7 @@ public class EventListener extends AbstractWebDriverEventListener {
                 break;
             } catch (WebDriverException var11) {
                 long tElapsed = System.currentTimeMillis() - tStart;
-                tElapsed /= FrameworkConstants.MaximumWait;
+                tElapsed /= FrameworkConstants.MAXIMUM_WAIT;
                 log.warn("Waiting for ExpectedCondition (Element to be clickable): " + tElapsed
                         + " seconds elapsed out of " + maxWaitSeconds);
                 if (tElapsed > maxWaitSeconds) { break; }
@@ -43,13 +43,13 @@ public class EventListener extends AbstractWebDriverEventListener {
 
     @Override
     public void afterClickOn(WebElement element, WebDriver driver) {
-        this.waitForAjax(driver, FrameworkConstants.MediumWait);
+        this.waitForAjax(driver, FrameworkConstants.MEDIUM_WAIT);
         this.log.info("Successful click on: '" + element + "'");
     }
 
     @Override
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-        this.waitForAjax(driver, FrameworkConstants.MediumWait);
+        this.waitForAjax(driver, FrameworkConstants.MEDIUM_WAIT);
         this.log.info("Attempting to locate: '" + by + "'");
     }
 
@@ -70,7 +70,7 @@ public class EventListener extends AbstractWebDriverEventListener {
 
     public void hold() {
         try {
-            Thread.sleep(FrameworkConstants.MaximumWait);
+            Thread.sleep(FrameworkConstants.MAXIMUM_WAIT);
         } catch (InterruptedException ie) {
             this.log.error(ie.getMessage());
             Thread.currentThread().interrupt();
@@ -106,7 +106,7 @@ public class EventListener extends AbstractWebDriverEventListener {
                 do {
                     this.hold();
                     tElapsed = System.currentTimeMillis() - tStart;
-                    tElapsed /= FrameworkConstants.MaximumWait;
+                    tElapsed /= FrameworkConstants.MAXIMUM_WAIT;
                     this.log.warn("<<JS Error>> Waiting for max time: " + tElapsed + " seconds elapsed out of "
                             + maxWaitInSecond);
                 } while (tElapsed <= (long) maxWaitInSecond);
@@ -115,7 +115,7 @@ public class EventListener extends AbstractWebDriverEventListener {
             }
 
             tElapsed = System.currentTimeMillis() - tStart;
-            tElapsed /= FrameworkConstants.MaximumWait;
+            tElapsed /= FrameworkConstants.MAXIMUM_WAIT;
             this.log.info("Waiting for ajax: " + tElapsed + " seconds elapsed out of " + maxWaitInSecond);
         } while (tElapsed <= (long) maxWaitInSecond);
     }
@@ -143,7 +143,7 @@ public class EventListener extends AbstractWebDriverEventListener {
 
     @Override
     public void beforeGetText(WebElement element, WebDriver driver) {
-        waitForAjax(driver, FrameworkConstants.LargeWait);
+        waitForAjax(driver, FrameworkConstants.LARGE_WAIT);
         log.info("Attempting to locate: '" + element + "'");
     }
 

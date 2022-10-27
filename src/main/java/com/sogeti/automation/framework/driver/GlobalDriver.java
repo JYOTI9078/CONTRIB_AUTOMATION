@@ -4,7 +4,6 @@ import com.epam.healenium.SelfHealingDriver;
 import com.sogeti.automation.framework.constants.AppConstants;
 import com.sogeti.automation.framework.constants.FrameworkConstants;
 import com.sogeti.automation.framework.utils.Logging;
-import com.sogeti.automation.framework.utils.PropertyReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.PageLoadStrategy;
@@ -133,8 +132,8 @@ public class GlobalDriver {
         }
 
         _sDriver = SelfHealingDriver.create(delegate);
-        _sDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(FrameworkConstants.SmallWait));
-        _sDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(FrameworkConstants.LargeWait));
+        _sDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(FrameworkConstants.SMALL_WAIT));
+        _sDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(FrameworkConstants.LARGE_WAIT));
         _sDriver.manage().window().maximize();
 
         WebDriverListener listener = new WebDriverListener() {
