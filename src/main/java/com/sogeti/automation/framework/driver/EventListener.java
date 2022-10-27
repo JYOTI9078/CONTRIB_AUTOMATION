@@ -1,8 +1,8 @@
 package com.sogeti.automation.framework.driver;
 
+import com.sogeti.automation.framework.constants.AppConstants;
 import com.sogeti.automation.framework.constants.FrameworkConstants;
 import com.sogeti.automation.framework.utils.Logging;
-import com.sogeti.automation.framework.utils.PropertyReader;
 import com.sogeti.automation.framework.utils.Screenshot;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
@@ -81,14 +81,14 @@ public class EventListener extends AbstractWebDriverEventListener {
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         try {
-            String res = js.executeScript("return jQuery.active", new Object[0]).toString();
+            String res = js.executeScript("return jQuery.active").toString();
             this.log.info("." + res + ".");
             return Integer.parseInt(res);
         } catch (WebDriverException var4) {
-            return js.executeScript("return document.readyState", new Object[0]).equals("complete") ? 0 : 1;
+            return js.executeScript("return document.readyState").equals("complete") ? 0 : 1;
         } catch (NumberFormatException nfe) {
             this.log.error(nfe.getMessage());
-            return js.executeScript("return document.readyState", new Object[0]).equals("complete") ? 0 : 1;
+            return js.executeScript("return document.readyState").equals("complete") ? 0 : 1;
         }
     }
 
@@ -126,18 +126,14 @@ public class EventListener extends AbstractWebDriverEventListener {
         String ex = throwable.getClass().toString().trim().substring(6);
         this.log.error(ex);
 
-        try {
-            if (PropertyReader.getFieldValue("ScreenshotEnable").equalsIgnoreCase("true")) {
-                this.ss = new Screenshot(driver);
+        if (AppConstants.Web.SCREENSHOT_ENABLE.equalsIgnoreCase("true")) {
+            this.ss = new Screenshot(driver);
 
-                try {
-                    this.ss.setPathTakeScreenshot(testResult);
-                } catch (IOException var6) {
-                    this.log.error("Unable to take screenshot.\n" + var6.getMessage());
-                }
+            try {
+                this.ss.setPathTakeScreenshot(testResult);
+            } catch (IOException var6) {
+                this.log.error("Unable to take screenshot.\n" + var6.getMessage());
             }
-        } catch (Exception e) {
-            this.log.error(e.getMessage());
         }
     }
 
