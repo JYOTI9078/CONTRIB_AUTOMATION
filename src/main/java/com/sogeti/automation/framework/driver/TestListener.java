@@ -1,5 +1,6 @@
 package com.sogeti.automation.framework.driver;
 
+import com.sogeti.automation.framework.constants.AppConstants;
 import com.sogeti.automation.framework.utils.Logging;
 import com.sogeti.automation.framework.utils.PropertyReader;
 import com.sogeti.automation.framework.utils.Screenshot;
@@ -13,6 +14,7 @@ import java.lang.reflect.Method;
 
 public class TestListener implements ITestListener {
     protected Logging log = new Logging(this.getClass().getName());
+
     public Screenshot initSS(WebDriver d) {
         return new Screenshot(d);
     }
@@ -20,19 +22,15 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         this.log.error(result.toString());
-        try {
-            if (PropertyReader.getFieldValue("ScreenshotEnable").equalsIgnoreCase("true")) {
-                WebDriver driver = this.findWebDriverByReflection(result);
-                if (driver != null) {
-                    try {
-                        this.initSS(driver).setPathTakeScreenshot(result);
-                    } catch (IOException ie) {
-                        this.log.error(ie.getMessage());
-                    }
+        if (AppConstants.Web.SCREENSHOT_ENABLE.equalsIgnoreCase("true")) {
+            WebDriver driver = this.findWebDriverByReflection(result);
+            if (driver != null) {
+                try {
+                    this.initSS(driver).setPathTakeScreenshot(result);
+                } catch (IOException ie) {
+                    this.log.error(ie.getMessage());
                 }
             }
-        } catch (Exception e) {
-            this.log.error(e.getMessage());
         }
     }
 
@@ -76,19 +74,15 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
         this.log.warn(result.toString());
-        try {
-            if (PropertyReader.getFieldValue("ScreenshotEnable").equalsIgnoreCase("true")) {
-                WebDriver driver = this.findWebDriverByReflection(result);
-                if (driver != null) {
-                    try {
-                        this.initSS(driver).setPathTakeScreenshot(result);
-                    } catch (IOException ie) {
-                        this.log.error(ie.getMessage());
-                    }
+        if (AppConstants.Web.SCREENSHOT_ENABLE.equalsIgnoreCase("true")) {
+            WebDriver driver = this.findWebDriverByReflection(result);
+            if (driver != null) {
+                try {
+                    this.initSS(driver).setPathTakeScreenshot(result);
+                } catch (IOException ie) {
+                    this.log.error(ie.getMessage());
                 }
             }
-        } catch (Exception e) {
-            this.log.error(e.getMessage());
         }
     }
 

@@ -31,40 +31,40 @@ import java.util.Map;
 
 public class GlobalDriver {
 
-    private String browserName;
+//    private String browserName;
     private String _headless = "false";
-    private String executionServer = null;
-    private WebDriver _ldriver = null;
-    private SelfHealingDriver _sDriver = null;
+//    private String executionServer = null;
+//    private WebDriver _ldriver = null;
+//    private SelfHealingDriver _sDriver = null;
     private Logging log = new Logging(GlobalDriver.class.getName());
     private String defaultDownloadPath = null;
 
     public GlobalDriver() {
-        try {
-            _headless = System.getProperty("headlessMode");
-            if (_headless.equalsIgnoreCase("true"))
-                log.info("Running tests in headless mode.");
-        } catch (Exception ignore) {
-        }
+        _headless = System.getProperty("headlessMode");
+        if (_headless.equalsIgnoreCase("true"))
+            log.info("Running tests in headless mode.");
     }
 
     public String setDownloadPath() {
-        this.defaultDownloadPath = System.getProperty("user.dir")
-                + PropertyReader.getFieldValue("DefaultDownloadPath");
+        this.defaultDownloadPath = System.getProperty("user.dir") + AppConstants.DEFAULT_DOWNLOAD_PATH;
 
         return defaultDownloadPath;
     }
 
     public SelfHealingDriver init(String browser) {
+        String browserName = null;
+        String executionServer = null;
+
+        SelfHealingDriver _sDriver = null;
         WebDriver delegate = null;
         setDownloadPath();
         if (browser == null) {
-            browserName = PropertyReader.getFieldValue("TestBrowser");
+            browserName = AppConstants.Web.TEST_BROWSER;
         } else {
             browserName = browser;
         }
 
-        executionServer = PropertyReader.getFieldValue("ExecutionServer");
+        executionServer = AppConstants.EXECUTION_SERVER;
 
         ThreadContext.pop();
         ThreadContext.push(executionServer.toUpperCase());
@@ -77,7 +77,7 @@ public class GlobalDriver {
                 if (executionServer.equalsIgnoreCase("remote")) {
                     Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
 
-                    delegate = _ldriver = WebDriverManager.chromedriver()
+                    delegate = WebDriverManager.chromedriver()
                             .capabilities(setChromeOptions())
                             .remoteAddress(AppConstants.Web.GRID_HUB_URL)
                             .create();

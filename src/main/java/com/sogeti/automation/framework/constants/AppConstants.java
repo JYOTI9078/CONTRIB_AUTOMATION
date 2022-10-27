@@ -4,17 +4,20 @@ import com.sogeti.automation.framework.utils.PropertyReader;
 
 public class AppConstants {
 
+    public static final String EXECUTION_SERVER = PropertyReader.getFieldValue("ExecutionServer");
     public static final String INTERFACE_TYPE = PropertyReader.getFieldValue("InterfaceType");
+    public static final String DEFAULT_DOWNLOAD_PATH = PropertyReader.getFieldValue("DefaultDownloadPath");
     public static final String AZURE_KEYVAULT_URL = PropertyReader.getFieldValue("AZURE_KEYVAULT_URL");
 
     public static class Web {
+        public static final String TEST_BROWSER = PropertyReader.getFieldValue("TestBrowser");
         public static final String UI_BASE_URL = PropertyReader.getFieldValue("UI_BASE_URL");
         public static final String GRIP_HUB_PORT = PropertyReader.getFieldValue("GRID_HUB_PORT");
         public static final String GRID_HUB_URL = "http://" + PropertyReader.getFieldValue("GRID_HUB_IP")
                 + ":" + GRIP_HUB_PORT + "/wd/hub";
         public static final String UI_USERNAME = PropertyReader.getFieldValue("UI_USERNAME");
         public static final String UI_PASSWORD = PropertyReader.getFieldValue("UI_PASSWORD");
-
+        public static final String SCREENSHOT_ENABLE = PropertyReader.getFieldValue("ScreenshotEnable");
     }
 
     public static class Api {
