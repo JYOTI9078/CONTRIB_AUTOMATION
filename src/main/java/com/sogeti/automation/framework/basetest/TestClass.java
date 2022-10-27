@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 @Listeners({TestListener.class})
@@ -26,7 +27,7 @@ public class TestClass {
 //    protected String sheetName;
     protected Logging log = new Logging(this.getClass().getName());
 
-    public TestClass() throws Exception {
+    public TestClass() throws IOException {
         PropertyReader prop = new PropertyReader();
         String envName = System.getProperty("envName");
         prop.valueMap("Configs" + File.separator + envName + ".properties");
