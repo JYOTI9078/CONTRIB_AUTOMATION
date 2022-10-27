@@ -41,8 +41,8 @@ public class WebUtils {
             screenshot = ((TakesScreenshot) _hDriver.getDelegate()).getScreenshotAs(OutputType.BYTES);
             name.attach(screenshot, "image/png", name.getName());
         } catch (Exception e) {
-            log.error("Could not capture screenshot. " + e.getMessage());
-            e.printStackTrace();
+            log.error("Could not capture screenshot.\n" + e.getMessage());
+//            e.printStackTrace();
         }
     }
 
@@ -54,8 +54,8 @@ public class WebUtils {
                 screenshot = ((TakesScreenshot) _hDriver.getDelegate()).getScreenshotAs(OutputType.BYTES);
                 name.attach(screenshot, "image/png", name.getName());
             } catch (Exception e) {
-                log.error("Could not capture screenshot. " + e.getMessage());
-                e.printStackTrace();
+                log.error("Could not capture screenshot.\n" + e.getMessage());
+//                e.printStackTrace();
             }
         }
     }
@@ -63,10 +63,10 @@ public class WebUtils {
     public void closeWindow() {
         try {
             this._hDriver.close();
-            log.info("Current window has been closed.");
+            log.info("Current window closed successfully.");
         } catch (Exception e) {
-            log.error("Current window could not be closed. " + e.getMessage());
-            e.printStackTrace();
+            log.error("Current window could not be closed.\n" + e.getMessage());
+//            e.printStackTrace();
         }
     }
 
@@ -76,11 +76,11 @@ public class WebUtils {
             ((JavascriptExecutor) _hDriver).executeScript(link);
             log.info("Open new tab by pressing Ctrl+T");
         } catch (NoSuchWindowException ns) {
-            log.error("No window exist. " + ns.getMessage());
-            ns.printStackTrace();
+            log.error("No window exist.\n" + ns.getMessage());
+//            ns.printStackTrace();
         } catch (Exception e) {
-            log.error("Error occurred while opening new tab. " + e.getMessage());
-            e.printStackTrace();
+            log.error("Error occurred while opening new tab.\n" + e.getMessage());
+//            e.printStackTrace();
         }
     }
 
