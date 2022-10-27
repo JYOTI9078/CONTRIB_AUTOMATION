@@ -27,12 +27,14 @@ public class TestListener implements ITestListener {
                     try {
                         this.initSS(driver).setPathTakeScreenshot(result);
                     } catch (IOException ie) {
-                        ie.printStackTrace();
+                        this.log.error(ie.getMessage());
+//                        ie.printStackTrace();
                     }
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            this.log.error(e.getMessage());
+//            e.printStackTrace();
         }
     }
 
@@ -88,7 +90,8 @@ public class TestListener implements ITestListener {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            this.log.error(e.getMessage());
+//            e.printStackTrace();
         }
     }
 
