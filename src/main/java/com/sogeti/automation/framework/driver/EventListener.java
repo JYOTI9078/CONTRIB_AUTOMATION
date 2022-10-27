@@ -72,7 +72,9 @@ public class EventListener extends AbstractWebDriverEventListener {
         try {
             Thread.sleep(FrameworkConstants.MaximumWait);
         } catch (InterruptedException ie) {
-            ie.printStackTrace();
+            this.log.error(ie.getMessage());
+//            ie.printStackTrace();
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -86,7 +88,8 @@ public class EventListener extends AbstractWebDriverEventListener {
         } catch (WebDriverException var4) {
             return js.executeScript("return document.readyState", new Object[0]).equals("complete") ? 0 : 1;
         } catch (NumberFormatException nfe) {
-            nfe.printStackTrace();
+            this.log.error(nfe.getMessage());
+//            nfe.printStackTrace();
             return js.executeScript("return document.readyState", new Object[0]).equals("complete") ? 0 : 1;
         }
     }
@@ -137,7 +140,8 @@ public class EventListener extends AbstractWebDriverEventListener {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            this.log.error(e.getMessage());
+//            e.printStackTrace();
         }
     }
 
