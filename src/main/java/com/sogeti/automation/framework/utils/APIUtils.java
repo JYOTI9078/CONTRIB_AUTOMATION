@@ -17,9 +17,7 @@ import static io.restassured.RestAssured.given;
 public class APIUtils {
     private Logging log;
     //    public Response response;
-    private String body;
     private RequestSpecification request;
-
 
 
     public APIUtils() {
