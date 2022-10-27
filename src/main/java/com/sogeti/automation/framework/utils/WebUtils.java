@@ -42,7 +42,6 @@ public class WebUtils {
             name.attach(screenshot, "image/png", name.getName());
         } catch (Exception e) {
             log.error("Could not capture screenshot.\n" + e.getMessage());
-//            e.printStackTrace();
         }
     }
 
@@ -55,7 +54,6 @@ public class WebUtils {
                 name.attach(screenshot, "image/png", name.getName());
             } catch (Exception e) {
                 log.error("Could not capture screenshot.\n" + e.getMessage());
-//                e.printStackTrace();
             }
         }
     }
@@ -66,7 +64,6 @@ public class WebUtils {
             log.info("Current window closed successfully.");
         } catch (Exception e) {
             log.error("Current window could not be closed.\n" + e.getMessage());
-//            e.printStackTrace();
         }
     }
 
@@ -77,10 +74,8 @@ public class WebUtils {
             log.info("Open new tab by pressing Ctrl+T");
         } catch (NoSuchWindowException ns) {
             log.error("No window exist.\n" + ns.getMessage());
-//            ns.printStackTrace();
         } catch (Exception e) {
             log.error("Error occurred while opening new tab.\n" + e.getMessage());
-//            e.printStackTrace();
         }
     }
 

@@ -73,7 +73,6 @@ public class EventListener extends AbstractWebDriverEventListener {
             Thread.sleep(FrameworkConstants.MaximumWait);
         } catch (InterruptedException ie) {
             this.log.error(ie.getMessage());
-//            ie.printStackTrace();
             Thread.currentThread().interrupt();
         }
     }
@@ -89,7 +88,6 @@ public class EventListener extends AbstractWebDriverEventListener {
             return js.executeScript("return document.readyState", new Object[0]).equals("complete") ? 0 : 1;
         } catch (NumberFormatException nfe) {
             this.log.error(nfe.getMessage());
-//            nfe.printStackTrace();
             return js.executeScript("return document.readyState", new Object[0]).equals("complete") ? 0 : 1;
         }
     }
@@ -135,13 +133,11 @@ public class EventListener extends AbstractWebDriverEventListener {
                 try {
                     this.ss.setPathTakeScreenshot(testResult);
                 } catch (IOException var6) {
-                    this.log.error("Unable to take screenshot.");
-                    var6.printStackTrace();
+                    this.log.error("Unable to take screenshot.\n" + var6.getMessage());
                 }
             }
         } catch (Exception e) {
             this.log.error(e.getMessage());
-//            e.printStackTrace();
         }
     }
 

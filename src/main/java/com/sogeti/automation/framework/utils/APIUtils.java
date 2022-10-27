@@ -227,7 +227,6 @@ public class APIUtils {
             return response;
         } catch (Exception e) {
             this.log.error(e.getMessage());
-//            e.printStackTrace();
             throw new RuntimeException("Failed to execute API\n", e);
         }
 
@@ -257,7 +256,6 @@ public class APIUtils {
             return response;
         } catch (Exception e) {
             this.log.error(e.getMessage());
-//            e.printStackTrace();
             throw new RuntimeException("Failed to get data from API", e);
         }
     }
@@ -286,7 +284,6 @@ public class APIUtils {
             return response;
         } catch (Exception e) {
             this.log.error(e.getMessage());
-//            e.printStackTrace();
             throw new RuntimeException("Failed to execute API\n", e);
         }
     }
@@ -315,7 +312,6 @@ public class APIUtils {
             return response;
         } catch (Exception e) {
             this.log.error(e.getMessage());
-//            e.printStackTrace();
             throw new RuntimeException("Failed to execute API\n", e);
         }
     }
@@ -343,7 +339,6 @@ public class APIUtils {
             return response;
         } catch (Exception e) {
             this.log.error(e.getMessage());
-//            e.printStackTrace();
             throw new RuntimeException("Failed to execute API\n", e);
         }
     }
@@ -372,7 +367,6 @@ public class APIUtils {
             return response;
         } catch (Exception e) {
             this.log.error(e.getMessage());
-//            e.printStackTrace();
             throw new RuntimeException("Failed to execute API\n", e);
         }
     }
