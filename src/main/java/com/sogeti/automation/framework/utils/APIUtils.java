@@ -35,13 +35,13 @@ public class APIUtils {
         log = new Logging(this.getClass().getName());
 
         switch (authType) {
-            case Basic:
+            case BASIC:
                 request = this.headerSetupBasic(Api.API_USERNAME, Api.API_PASSWORD);
                 break;
-            case Digest:
+            case DIGEST:
                 request = this.headerSetupDigest(Api.API_USERNAME, Api.API_PASSWORD);
                 break;
-            case Token:
+            case TOKEN:
                 request = this.headerSetup(Api.API_TOKEN);
                 break;
             default:
@@ -56,15 +56,15 @@ public class APIUtils {
         ThreadContext.push(this.getClass().getSimpleName());
         log = new Logging(this.getClass().getName());
 
-        if (authType == AuthenticationType.OAuth2) {
+        if (authType == AuthenticationType.OAUTH2) {
             switch (grantType) {
-                case Client_Credentials:
+                case CLIENT_CREDENTIALS:
                     request = this.headerSetup(getAccessTokenWithClientCredentials());
                     break;
-                case Authorization_Code:
+                case AUTHORIZATION_CODE:
                     request = this.headerSetup(getAccessTokenWithAuthorizationCode());
                     break;
-                case Password:
+                case PASSWORD:
                     request = this.headerSetup(getAccessTokenWithPassword());
                     break;
                 default:
@@ -226,7 +226,8 @@ public class APIUtils {
 
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            this.log.error(e.getMessage());
+//            e.printStackTrace();
             throw new RuntimeException("Failed to execute API\n", e);
         }
 
@@ -255,7 +256,8 @@ public class APIUtils {
 
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            this.log.error(e.getMessage());
+//            e.printStackTrace();
             throw new RuntimeException("Failed to get data from API", e);
         }
     }
@@ -283,7 +285,8 @@ public class APIUtils {
 
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            this.log.error(e.getMessage());
+//            e.printStackTrace();
             throw new RuntimeException("Failed to execute API\n", e);
         }
     }
@@ -311,7 +314,8 @@ public class APIUtils {
 
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            this.log.error(e.getMessage());
+//            e.printStackTrace();
             throw new RuntimeException("Failed to execute API\n", e);
         }
     }
@@ -338,7 +342,8 @@ public class APIUtils {
 
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            this.log.error(e.getMessage());
+//            e.printStackTrace();
             throw new RuntimeException("Failed to execute API\n", e);
         }
     }
@@ -366,7 +371,8 @@ public class APIUtils {
 
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            this.log.error(e.getMessage());
+//            e.printStackTrace();
             throw new RuntimeException("Failed to execute API\n", e);
         }
     }

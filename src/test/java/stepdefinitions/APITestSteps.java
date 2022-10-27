@@ -22,7 +22,7 @@ public class APITestSteps {
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
 
-        apiUtils = new APIUtils(AuthenticationType.Token);
+        apiUtils = new APIUtils(AuthenticationType.TOKEN);
     }
 
     @When("^user makes a GET User api call for (.*)$")
