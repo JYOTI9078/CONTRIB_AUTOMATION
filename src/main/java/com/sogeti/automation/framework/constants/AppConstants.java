@@ -33,7 +33,7 @@ public class AppConstants {
         public static final String API_USERNAME = PropertyReader.getFieldValue("API_USERNAME");
         public static final String API_PASSWORD = PropertyReader.getFieldValue("API_PASSWORD");
         public static final String API_GRANT_TYPE = PropertyReader.getFieldValue("API_GRANT_TYPE");
-        public static final String API_TOKEN = PropertyReader.getFieldValue("API_TOKEN");
+        public static final String API_BEARER_TOKEN = PropertyReader.getFieldValue("API_BEARER_TOKEN");
         public static final String API_SCOPE = PropertyReader.getFieldValue("API_SCOPE");
         public static final String API_ACCESS_TOKEN_URL = PropertyReader.getFieldValue("API_ACCESS_TOKEN_URL");
         public static final String API_CLIENT_ID = PropertyReader.getFieldValue("API_CLIENT_ID");

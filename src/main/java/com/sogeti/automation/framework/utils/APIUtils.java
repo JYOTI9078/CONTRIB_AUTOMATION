@@ -40,7 +40,7 @@ public class APIUtils {
                 request = this.headerSetupDigest(Api.API_USERNAME, Api.API_PASSWORD);
                 break;
             case TOKEN:
-                request = this.headerSetup(Api.API_TOKEN);
+                request = this.headerSetup(Api.API_BEARER_TOKEN);
                 break;
             default:
                 log.error("INVALID API AUTHENTICATION TYPE");
