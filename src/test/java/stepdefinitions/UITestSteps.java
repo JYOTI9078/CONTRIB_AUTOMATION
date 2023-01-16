@@ -3,6 +3,7 @@ package stepdefinitions;
 import com.sogeti.automation.framework.basetest.TestClass;
 import com.sogeti.automation.framework.basetest.TestContext;
 import com.sogeti.automation.framework.constants.AppConstants.Web;
+import com.sogeti.automation.framework.constants.FrameworkConstants;
 import com.sogeti.automation.test.pageFactory.SwagLabsDemo_LoginPage;
 import com.sogeti.automation.test.pageFactory.SwagLabsDemo_ProductsPage;
 import io.cucumber.java.en.Given;
@@ -39,18 +40,20 @@ public class UITestSteps extends TestClass {
     }
 
     @When("^user is on Products page$")
-    public void isProductsPageLoaded() {
+    public void isProductsPageLoaded() throws InterruptedException {
         Assert.assertTrue(swagLabsDemo_productsPage.isProductsTitleVisible(),
                 "Products page did not load.");
+        Thread.sleep(2000);
     }
 
     @Then("^verify that price of (.*) is (.*)")
-    public void verifyProductPrice(String productName, String productPrice) {
+    public void verifyProductPrice(String productName, String productPrice) throws InterruptedException {
         String actualProductName = swagLabsDemo_productsPage.getProductName(productName);
         String actualProductPrice = swagLabsDemo_productsPage.getProductPrice(productName);
 
         Assert.assertEquals(actualProductName, productName, "Actual Product Name does not match expected value.");
         Assert.assertEquals(actualProductPrice, productPrice,
                 "Price of product '" + productName + "' does not match expected value.");
+        Thread.sleep(2000);
     }
 }

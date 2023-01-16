@@ -65,5 +65,17 @@ public class AppConstants {
             PASSWORD
         }
     }
+    public static class Android {
+        public static final String ANDROID_AUTOMATIONNAME = PropertyReader.getFieldValue("ANDROID_AUTOMATIONNAME");
 
+        public static final String ANDROID_PLATFORMNAME = PropertyReader.getFieldValue("ANDROID_PLATFORMNAME");
+
+        public static final String ANDROID_DEVICENAME = PropertyReader.getFieldValue("ANDROID_DEVICENAME");
+
+        public static final String ANDROID_APP = PropertyReader.getFieldValue("ANDROID_APP");
+
+        public static final String ANDROID_UDID = PropertyReader.getFieldValue("ANDROID_UDID");
+
+        public static final String ANDROID_ORIENTATION = PropertyReader.getFieldValue("ANDROID_ORIENTATION");
+    }
 }
