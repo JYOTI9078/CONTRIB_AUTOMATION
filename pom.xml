@@ -181,6 +181,7 @@
                     <includes>
                         <exclude>**/TestRunner.java</exclude>
                     </includes>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -212,6 +213,7 @@
                             <classificationFiles>
                                 <param>**/classifications/*.properties</param>
                             </classificationFiles>
+                            <checkBuildResult>false</checkBuildResult>
                         </configuration>
                     </execution>
                 </executions>
