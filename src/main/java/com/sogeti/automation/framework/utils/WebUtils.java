@@ -34,7 +34,7 @@ public class WebUtils {
         this._hDriver.navigate().refresh();
     }
 
-    protected String getPageTitle() {
+    public String getPageTitle() {
         return _hDriver.getTitle();
     }
 
