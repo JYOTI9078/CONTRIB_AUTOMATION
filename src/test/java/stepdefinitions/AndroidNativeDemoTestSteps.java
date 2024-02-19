@@ -3,7 +3,6 @@ package stepdefinitions;
 import com.sogeti.automation.framework.basetest.TestClass;
 import com.sogeti.automation.framework.basetest.TestContext;
 import com.sogeti.automation.test.pageFactory.AndroidNativeDemo_FileApp;
-import com.sogeti.automation.test.pageFactory.AndroidWebDemo_LoginPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.apache.logging.log4j.ThreadContext;
@@ -17,7 +16,7 @@ public class AndroidNativeDemoTestSteps extends TestClass {
     public AndroidNativeDemoTestSteps(TestContext context) throws Exception {
 //        super();
         this.testContext = context;
-        androidNativeDemoFileApp = testContext.getPageObjectManager().getAndroidNativeDemo_FileApp();
+        androidNativeDemoFileApp = testContext.getMobilePageObjectManager().getAndroidNativeDemo_FileApp();
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
     }

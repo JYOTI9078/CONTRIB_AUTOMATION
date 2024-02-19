@@ -6,6 +6,8 @@ public class AppConstants {
 
     public static final String EXECUTION_SERVER = PropertyReader.getFieldValue("ExecutionServer");
     public static final String INTERFACE_TYPE = PropertyReader.getFieldValue("InterfaceType");
+
+    public static final String MOBILEEXECUTIONTYPE = PropertyReader.getFieldValue("MobileExecutionType");
     public static final String DEFAULT_DOWNLOAD_PATH = PropertyReader.getFieldValue("DefaultDownloadPath");
     public static final String AZURE_KEYVAULT_URL = PropertyReader.getFieldValue("AZURE_KEYVAULT_URL");
 
@@ -18,7 +20,7 @@ public class AppConstants {
         public static final String UI_BASE_URL = PropertyReader.getFieldValue("UI_BASE_URL");
         public static final String GRIP_HUB_PORT = PropertyReader.getFieldValue("GRID_HUB_PORT");
         public static final String GRID_HUB_URL = "http://" + PropertyReader.getFieldValue("GRID_HUB_IP")
-                + ":" + GRIP_HUB_PORT + "/wd/hub";
+                + ":" + GRIP_HUB_PORT;
         public static final String UI_USERNAME = PropertyReader.getFieldValue("UI_USERNAME");
         public static final String UI_PASSWORD = PropertyReader.getFieldValue("UI_PASSWORD");
         public static final String SCREENSHOT_ENABLE = PropertyReader.getFieldValue("ScreenshotEnable");
@@ -44,7 +46,7 @@ public class AppConstants {
         public static final String API_CODE_CHALLENGE = PropertyReader.getFieldValue("API_CODE_CHALLENGE");
         public static final String API_CODE_CHALLENGE_METHOD = PropertyReader.getFieldValue("API_CODE_CHALLENGE_METHOD");
 
-        public static final String GITHUB_USER_URL = "/users/";
+        public static final String GITHUB_USER_URL = "/user/";
         public static final String GITHUB_USER_REPOS = "/user/repos";
         public static final String GITHUB_REPOS = "/repos/";
 
@@ -65,10 +67,13 @@ public class AppConstants {
             PASSWORD
         }
     }
+
     public static class Android {
         public static final String ANDROID_AUTOMATIONNAME = PropertyReader.getFieldValue("ANDROID_AUTOMATIONNAME");
 
         public static final String ANDROID_PLATFORMNAME = PropertyReader.getFieldValue("ANDROID_PLATFORMNAME");
+
+        public static final String ANDROID_PLATFORMVERSION = PropertyReader.getFieldValue("ANDROID_PLATFORMVERSION");
 
         public static final String ANDROID_DEVICENAME = PropertyReader.getFieldValue("ANDROID_DEVICENAME");
 
@@ -76,6 +81,16 @@ public class AppConstants {
 
         public static final String ANDROID_UDID = PropertyReader.getFieldValue("ANDROID_UDID");
 
+        public static final String ANDROID_BROWSERNAME = PropertyReader.getFieldValue("ANDROID_BROWSERNAME");
+
         public static final String ANDROID_ORIENTATION = PropertyReader.getFieldValue("ANDROID_ORIENTATION");
+
+        public static final String ANDROID_APP_PACKAGE = PropertyReader.getFieldValue("ANDROID_APP_PACKAGE");
+
+        public static final String ANDROID_APP_ACTIVITY = PropertyReader.getFieldValue("ANDROID_APP_ACTIVITY");
+
+        public static final String ANDROID_URL = PropertyReader.getFieldValue("ANDROID_URL");
+
+        public static final String ANDROID_BASE_URL = PropertyReader.getFieldValue("ANDROID_BASE_URL");
     }
 }

@@ -2,7 +2,6 @@ package com.sogeti.automation.framework.driver;
 
 import com.sogeti.automation.framework.constants.AppConstants;
 import com.sogeti.automation.framework.utils.Logging;
-import com.sogeti.automation.framework.utils.PropertyReader;
 import com.sogeti.automation.framework.utils.Screenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;

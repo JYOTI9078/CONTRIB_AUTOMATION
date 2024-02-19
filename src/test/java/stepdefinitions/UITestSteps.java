@@ -3,7 +3,6 @@ package stepdefinitions;
 import com.sogeti.automation.framework.basetest.TestClass;
 import com.sogeti.automation.framework.basetest.TestContext;
 import com.sogeti.automation.framework.constants.AppConstants.Web;
-import com.sogeti.automation.framework.constants.FrameworkConstants;
 import com.sogeti.automation.test.pageFactory.SwagLabsDemo_LoginPage;
 import com.sogeti.automation.test.pageFactory.SwagLabsDemo_ProductsPage;
 import io.cucumber.java.en.Given;

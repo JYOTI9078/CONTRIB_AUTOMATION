@@ -12,7 +12,6 @@ import org.apache.logging.log4j.ThreadContext;
 import org.testng.Assert;
 
 import java.util.List;
-import java.util.Map;
 
 public class EmpMgtDemoTestSteps extends TestClass {
 
@@ -23,8 +22,8 @@ public class EmpMgtDemoTestSteps extends TestClass {
     public EmpMgtDemoTestSteps(TestContext context) throws Exception {
 //        super();
         this.testContext = context;
-        empLoginPage = testContext.getPageObjectManager().getEmpMgtDemo_LoginPage();
-        empAddPage= testContext.getPageObjectManager().getEmpMgtDemo_AddEmpPage();
+        empLoginPage = testContext.getMobilePageObjectManager().getEmpMgtDemo_LoginPage();
+        empAddPage= testContext.getMobilePageObjectManager().getEmpMgtDemo_AddEmpPage();
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
     }
@@ -59,7 +58,6 @@ public class EmpMgtDemoTestSteps extends TestClass {
     public void userAddsAnEmployeeWithAllTheDetails(DataTable testData) {
 
         List<String> data = testData.transpose().asList(String.class);
-        System.out.println(data);
         String nameCheck = data.get(0)+" "+data.get(1);
         empAddPage.dataEntryforNewEmployeeAdd(data);
         Assert.assertEquals(empAddPage.verifyDataEntryforNewEmployeeAdd(),nameCheck,"Employee not added");

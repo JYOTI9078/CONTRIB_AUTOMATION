@@ -16,8 +16,8 @@ public class SwagLabsDemo_ProductsPage extends PageClass {
     @FindBy(xpath = "//span[text()='Products']")
     private WebElement lblProductsTitle;
 
-    private String productName = "//div[text()='${labelName}']";
-    private String productPrice = "//div[text()='${labelName}']/ancestor::div[@class='inventory_item_label']/following-sibling::div[@class='pricebar']/div[@class='inventory_item_price']";
+    private final String productName = "//div[text()='${labelName}']";
+    private final String productPrice = "//div[text()='${labelName}']/ancestor::div[@class='inventory_item_label']/following-sibling::div[@class='pricebar']/div[@class='inventory_item_price']";
 
     public SwagLabsDemo_ProductsPage(SelfHealingDriver driver) {
         super(driver);

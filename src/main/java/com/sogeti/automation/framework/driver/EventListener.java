@@ -16,7 +16,7 @@ import java.time.Duration;
 
 public class EventListener extends AbstractWebDriverEventListener {
     Screenshot ss;
-    private Logging log = new Logging(super.getClass().getSimpleName());
+    private final Logging log = new Logging(super.getClass().getSimpleName());
 
     @Override
     public void beforeClickOn(WebElement element, WebDriver driver) {

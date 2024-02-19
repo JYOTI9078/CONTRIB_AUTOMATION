@@ -155,7 +155,7 @@ public class WebUtils {
     }
 
     protected List<WebElement> waitForElementsToBeVisible(List<WebElement> elements) {
-        return (List<WebElement>) wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+        return wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
     protected boolean waitForElementToBeInvisible(WebElement element) {

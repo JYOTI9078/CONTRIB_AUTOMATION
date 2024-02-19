@@ -1,9 +1,7 @@
 package com.sogeti.automation.test.pageFactory;
 
 import com.epam.healenium.SelfHealingDriver;
-import com.sogeti.automation.framework.constants.AppConstants;
 import com.sogeti.automation.framework.constants.FrameworkConstants;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -11,12 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 public class EmpMgtDemo_AddEmpPage extends PageClass {
 

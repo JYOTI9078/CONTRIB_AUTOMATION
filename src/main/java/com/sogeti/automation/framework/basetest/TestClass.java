@@ -50,6 +50,14 @@ public class TestClass {
         return healingDriver;
     }
 
+    public SelfHealingDriver setup_Environment(String url) throws Exception {
+        gDriver = new GlobalDriver();
+        this.log.info("Initializing appium driver");
+        healingDriver = gDriver.mobileinit(url);
+
+        return healingDriver;
+    }
+
     @BeforeMethod
     public void beforeMethod(Method method) {
         Thread thread = new Thread();

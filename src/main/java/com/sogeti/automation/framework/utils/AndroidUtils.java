@@ -2,7 +2,6 @@ package com.sogeti.automation.framework.utils;
 
 import com.epam.healenium.SelfHealingDriver;
 import com.sogeti.automation.framework.constants.FrameworkConstants;
-import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.Scenario;
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.*;
@@ -158,7 +157,7 @@ public class AndroidUtils {
     }
 
     protected List<WebElement> waitForElementsToBeVisible(List<WebElement> elements) {
-        return (List<WebElement>) wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+        return wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
     protected boolean waitForElementToBeInvisible(WebElement element) {
