@@ -216,6 +216,7 @@ public class GlobalDriver {
         options.addArguments("ignore-certificate-errors");
         options.addArguments("--disable-extensions");
         options.addArguments("start-maximized");
+        options.addArguments("--remote-allow-origins=*");
         options.addArguments("--use-fake-ui-for-media-stream=1");
         return options;
     }
