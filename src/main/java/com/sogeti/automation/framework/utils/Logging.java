@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.testng.Reporter;
 
 public class Logging {
-    private Logger log;
+    private final Logger log;
 
     public Logging(String logName) {
         this.log = LogManager.getLogger(logName);

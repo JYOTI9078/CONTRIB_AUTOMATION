@@ -6,8 +6,8 @@ import java.util.Properties;
 
 public class PropertyReader {
 
-    private static Properties valueMap = new Properties();
-    private static Logging log = new Logging(PropertyReader.class.getName());
+    private static final Properties valueMap = new Properties();
+    private static final Logging log = new Logging(PropertyReader.class.getName());
 
     public void valueMap(String fileName) throws IOException {
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName);

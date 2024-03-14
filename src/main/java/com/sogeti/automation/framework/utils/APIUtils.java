@@ -15,7 +15,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class APIUtils {
-    private Logging log;
+    private final Logging log;
     //    public Response response;
     private RequestSpecification request;
 

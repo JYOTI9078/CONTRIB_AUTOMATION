@@ -15,15 +15,17 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WebUtils {
+public class AndroidUtils {
 
     protected SelfHealingDriver _hDriver;
     protected WebDriverWait wait;
 
     protected Logging log = new Logging(this.getClass().getName());
 
-    public WebUtils(SelfHealingDriver driver) {
-        this._hDriver = driver;
+
+
+    public AndroidUtils(SelfHealingDriver driver) {
+        this._hDriver = driver.getDelegate();
         wait = new WebDriverWait(driver, Duration.ofSeconds(FrameworkConstants.MEDIUM_WAIT));
         ThreadContext.pop();
         ThreadContext.push(this.getClass().getSimpleName());
