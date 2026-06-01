@@ -1,0 +1,82 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header>
+    <ns6:Security xmlns:ns10="http://xmldefs.bcpraha.com/Customer/Psa/Pms/ProtocolProfitability/v1" xmlns:ns11="http://xmldefs.bcpraha.com/Customer/Psa/Ppas4Pms/v1" xmlns:ns12="http://xmldefs.bcpraha.com/Customer/Psa/Pms/Common/v1" xmlns:ns3="http://www.w3.org/2005/08/addressing" xmlns:ns4="http://www.w3.org/2000/09/xmldsig#" xmlns:ns5="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:ns6="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:ns7="http://xmldefs.bcpraha.com/Common/Ws/v1" xmlns:ns8="http://xmldefs.bcpraha.com/Common/Common/v1" xmlns:ns9="http://xmldefs.bcpraha.com/Customer/Psa/Common/v1" SOAP-ENV:mustUnderstand="0">
+      <ns6:UsernameToken>
+        <ns6:Username>mwpfts01</ns6:Username>
+      </ns6:UsernameToken>
+      <ns6:Password>fts01ind</ns6:Password>
+    </ns6:Security>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns11:pamInitiateProfitabilityStudy xmlns:ns10="http://xmldefs.bcpraha.com/Customer/Psa/Pms/ProtocolProfitability/v1" xmlns:ns11="http://xmldefs.bcpraha.com/Customer/Psa/Ppas4Pms/v1" xmlns:ns12="http://xmldefs.bcpraha.com/Customer/Psa/Pms/Common/v1" xmlns:ns3="http://www.w3.org/2005/08/addressing" xmlns:ns4="http://www.w3.org/2000/09/xmldsig#" xmlns:ns5="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:ns6="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:ns7="http://xmldefs.bcpraha.com/Common/Ws/v1" xmlns:ns8="http://xmldefs.bcpraha.com/Common/Common/v1" xmlns:ns9="http://xmldefs.bcpraha.com/Customer/Psa/Common/v1">
+      <ns11:input>
+        <ns7:clientRequestContext>
+          <ns7:systemId>Fts:TDU5R97P02QMPS0</ns7:systemId>
+          <ns7:brandId>FT</ns7:brandId>
+          <ns7:marketId>1000</ns7:marketId>
+          <ns7:userId kind="INETPSA">SD51978</ns7:userId>
+          <ns7:soapMessageUid>0abedf21-68c8-4ea0-a1c9-99071d90e51e</ns7:soapMessageUid>
+          <ns7:requestClientTimestamp>2024-09-27T16:18:18.554+02:00</ns7:requestClientTimestamp>
+        </ns7:clientRequestContext>
+        <ns10:studyInitiationType>MANUAL_SIMULATION</ns10:studyInitiationType>
+        <ns10:evaluatedStudyIdsExpectedInResponse>true</ns10:evaluatedStudyIdsExpectedInResponse>
+        <ns10:studyInitiationDataList>
+          <ns10:studyInitiationData>
+            <ns10:protocolEstimatedPotentialAnnualCarVolume>10</ns10:protocolEstimatedPotentialAnnualCarVolume>
+            <ns10:protocolId pmsKind="FLEETSALES">P-PES-2410-00472</ns10:protocolId>
+            <ns10:protocolValidityPeriod>
+              <ns9:startDate>
+                <ns8:year>2026</ns8:year>
+                <ns8:month>03</ns8:month>
+                <ns8:day>11</ns8:day>
+              </ns9:startDate>
+              <ns9:endDate>
+                <ns8:year>2026</ns8:year>
+                <ns8:month>04</ns8:month>
+                <ns8:day>15</ns8:day>
+              </ns9:endDate>
+            </ns10:protocolValidityPeriod>
+            <ns10:protocolInvoicing>DEALER</ns10:protocolInvoicing>
+            <ns10:buybackType>NO_BUYBACK</ns10:buybackType>
+            <ns10:activityKind>FLEET_DEALER_NETWORK</ns10:activityKind>
+            <ns10:customerBasicData>
+              <ns12:pmsCustomerId pmsKind="FLEETSALES">AHKA-10OA9DX</ns12:pmsCustomerId>
+              <ns12:nationalId>A43017037</ns12:nationalId>
+              <ns12:customerLegalName>CARBONELL FIGUERAS SA</ns12:customerLegalName>
+            </ns10:customerBasicData>
+            <ns10:studyInitiationCarModelDiscountDataList>
+              <ns10:carModelDiscountLine>
+                <ns10:modelId>2021-M-ES-P00003</ns10:modelId>
+                <ns10:discountType>PRICE_LIST_WITH_OPTION</ns10:discountType>
+                <ns10:discount>
+                  <ns9:percent>10.00</ns9:percent>
+                </ns10:discount>
+                <ns10:carModelEstimatedPotentialAnnualCarVolume>10</ns10:carModelEstimatedPotentialAnnualCarVolume>
+                <ns10:optionalEquipmentDiscounts />
+                <ns10:carModelName>ES NUEVO 308</ns10:carModelName>
+                <ns10:carModelRange>308</ns10:carModelRange>
+                <ns10:buyback>
+                  <ns10:buybackLeasingEnd />
+                  <ns10:buybackCarValue>
+                    <ns12:residualValue>0</ns12:residualValue>
+                    <ns12:percentOfSpecificDegradation>0</ns12:percentOfSpecificDegradation>
+                  </ns10:buybackCarValue>
+                </ns10:buyback>
+                <ns10:miscellaneous />
+                <ns10:versions>
+                  <ns10:discountVersionData>
+                    <ns10:lcdv16Code>1000003131HE1000</ns10:lcdv16Code>
+                    <ns10:selectedForStudy>true</ns10:selectedForStudy>
+                    <ns10:versionEstimatedPotentialAnnualCarVolume>10</ns10:versionEstimatedPotentialAnnualCarVolume>
+                    <ns10:bonuses />
+                    <ns10:optionalEquipments />
+                  </ns10:discountVersionData>
+                </ns10:versions>
+              </ns10:carModelDiscountLine>
+            </ns10:studyInitiationCarModelDiscountDataList>
+          </ns10:studyInitiationData>
+        </ns10:studyInitiationDataList>
+      </ns11:input>
+    </ns11:pamInitiateProfitabilityStudy>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

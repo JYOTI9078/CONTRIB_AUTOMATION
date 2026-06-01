@@ -1,19 +1,28 @@
 package com.sogeti.automation.framework.utils;
 
-import com.epam.healenium.SelfHealingDriver;
-import com.sogeti.automation.framework.constants.FrameworkConstants;
-import io.cucumber.java.Scenario;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.ThreadContext;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NoSuchWindowException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
+import com.epam.healenium.SelfHealingDriver;
+import com.sogeti.automation.framework.constants.FrameworkConstants;
+
+import io.cucumber.java.Scenario;
 
 public class WebUtils {
 
@@ -36,6 +45,17 @@ public class WebUtils {
 
     public String getPageTitle() {
         return _hDriver.getTitle();
+    }
+
+    public void MouseOver(WebElement element) {
+
+        try {
+            Actions actions = new Actions(_hDriver);
+            actions.moveToElement(element).build().perform();
+        } catch (Exception e) {
+            log.error("Mouse Over Action Failed!" + e.getMessage());
+        }
+
     }
 
     protected void scrollIntoView(WebElement element) {
@@ -213,8 +233,7 @@ public class WebUtils {
         FluentWait<SelfHealingDriver> fluentWait = new FluentWait<>(_hDriver);
         try {
             fluentWait.withTimeout(Duration.ofSeconds(FrameworkConstants.MEDIUM_WAIT))
-                    .pollingEvery(Duration.ofSeconds(FrameworkConstants.MINIMUM_WAIT))
-                    .ignoring(NoSuchElementException.class)
+                    .pollingEvery(Duration.ofSeconds(FrameworkConstants.MINIMUM_WAIT)).ignoring(NoSuchElementException.class)
                     .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameIdOrName));
         } catch (Exception e) {
             log.error("Unable to switch to frame\n" + e.getMessage());
@@ -225,8 +244,7 @@ public class WebUtils {
         FluentWait<SelfHealingDriver> fluentWait = new FluentWait<>(_hDriver);
         try {
             fluentWait.withTimeout(Duration.ofSeconds(FrameworkConstants.MEDIUM_WAIT))
-                    .pollingEvery(Duration.ofSeconds(FrameworkConstants.MINIMUM_WAIT))
-                    .ignoring(NoSuchElementException.class)
+                    .pollingEvery(Duration.ofSeconds(FrameworkConstants.MINIMUM_WAIT)).ignoring(NoSuchElementException.class)
                     .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameIndex));
         } catch (Exception e) {
             log.error("Unable to switch to frame\n" + e.getMessage());
@@ -278,8 +296,7 @@ public class WebUtils {
 
         try {
             fluentWait.withTimeout(Duration.ofSeconds(FrameworkConstants.MEDIUM_WAIT))
-                    .pollingEvery(Duration.ofSeconds(FrameworkConstants.MINIMUM_WAIT))
-                    .ignoring(NoSuchElementException.class)
+                    .pollingEvery(Duration.ofSeconds(FrameworkConstants.MINIMUM_WAIT)).ignoring(NoSuchElementException.class)
                     .until(ExpectedConditions.visibilityOfNestedElementsLocatedBy(element, childLocator));
             status = true;
         } catch (Exception e) {
@@ -288,4 +305,5 @@ public class WebUtils {
 
         return status;
     }
+
 }

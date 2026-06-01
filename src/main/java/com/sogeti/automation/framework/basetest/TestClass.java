@@ -1,11 +1,9 @@
 package com.sogeti.automation.framework.basetest;
 
-import com.epam.healenium.SelfHealingDriver;
-import com.sogeti.automation.framework.constants.AppConstants;
-import com.sogeti.automation.framework.driver.GlobalDriver;
-import com.sogeti.automation.framework.driver.TestListener;
-import com.sogeti.automation.framework.utils.Logging;
-import com.sogeti.automation.framework.utils.PropertyReader;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
+
 import org.apache.logging.log4j.ThreadContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -13,11 +11,15 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Method;
+import com.epam.healenium.SelfHealingDriver;
+import com.sogeti.automation.framework.constants.AppConstants;
+import com.sogeti.automation.framework.driver.GlobalDriver;
+import com.sogeti.automation.framework.driver.TestListener;
+import com.sogeti.automation.framework.utils.Logging;
+import com.sogeti.automation.framework.utils.PropertyReader;
+import com.sogeti.automation.test.pageFactory.Login;
 
-@Listeners({TestListener.class})
+@Listeners({ TestListener.class })
 public class TestClass {
 //    protected ExcelReader data;
     protected GlobalDriver gDriver;
@@ -40,12 +42,37 @@ public class TestClass {
         return this.healingDriver;
     }
 
-    public SelfHealingDriver setupEnvironment(String browser) {
+//    public SelfHealingDriver setupEnvironment(String browser) {
+//        
+//        this.testURL = AppConstants.Web.UI_BASE_URL;
+//        gDriver = new GlobalDriver();
+//        this.log.info("Initializing self healing driver");
+//        healingDriver = gDriver.init(browser);
+//        healingDriver.get(testURL);
+//
+//        return healingDriver;
+//    }
+    public SelfHealingDriver setupEnvironment(String browser) throws Exception {
         this.testURL = AppConstants.Web.UI_BASE_URL;
         gDriver = new GlobalDriver();
         this.log.info("Initializing self healing driver");
         healingDriver = gDriver.init(browser);
         healingDriver.get(testURL);
+
+        // Use your Login helper to manage cookies
+        Login loginHelper = new Login(healingDriver);
+
+        // Try to load cookies and refresh
+        boolean cookiesLoaded = loginHelper.loadAuthState("cookies.data");
+        healingDriver.navigate().refresh();
+
+        // If not logged in, do manual login, then save cookies
+        if (!loginHelper.isLoggedIn()) {
+            // Perform your login steps here (manual or automated)
+            // e.g., loginHelper.performLogin(user, pass, ...);
+            Thread.sleep(30000); // Wait for manual login & MFA
+            loginHelper.saveAuthState("cookies.data");
+        }
 
         return healingDriver;
     }

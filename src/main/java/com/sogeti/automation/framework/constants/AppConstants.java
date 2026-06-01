@@ -19,11 +19,12 @@ public class AppConstants {
         public static final String TEST_BROWSER = PropertyReader.getFieldValue("TestBrowser");
         public static final String UI_BASE_URL = PropertyReader.getFieldValue("UI_BASE_URL");
         public static final String GRIP_HUB_PORT = PropertyReader.getFieldValue("GRID_HUB_PORT");
-        public static final String GRID_HUB_URL = "http://" + PropertyReader.getFieldValue("GRID_HUB_IP")
-                + ":" + GRIP_HUB_PORT;
+        public static final String GRID_HUB_URL = "http://" + PropertyReader.getFieldValue("GRID_HUB_IP") + ":" + GRIP_HUB_PORT;
         public static final String UI_USERNAME = PropertyReader.getFieldValue("UI_USERNAME");
         public static final String UI_PASSWORD = PropertyReader.getFieldValue("UI_PASSWORD");
         public static final String SCREENSHOT_ENABLE = PropertyReader.getFieldValue("ScreenshotEnable");
+        public static final String userEmailId = PropertyReader.getFieldValue("userEmailId");
+        public static final String Brand = PropertyReader.getFieldValue("Brand");
 
         private Web() {
             throw new IllegalStateException("Web Constants class");
@@ -55,16 +56,11 @@ public class AppConstants {
         }
 
         public enum AuthenticationType {
-            BASIC,
-            DIGEST,
-            TOKEN,
-            OAUTH2
+            BASIC, DIGEST, TOKEN, OAUTH2
         }
 
         public enum GrantType {
-            AUTHORIZATION_CODE,
-            CLIENT_CREDENTIALS,
-            PASSWORD
+            AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD
         }
     }
 

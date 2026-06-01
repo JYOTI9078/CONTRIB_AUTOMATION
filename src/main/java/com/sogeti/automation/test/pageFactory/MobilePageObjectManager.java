@@ -1,10 +1,11 @@
 package com.sogeti.automation.test.pageFactory;
 
-import com.epam.healenium.SelfHealingDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import com.epam.healenium.SelfHealingDriver;
+
 public class MobilePageObjectManager {
-     SelfHealingDriver aDriver;
+    SelfHealingDriver aDriver;
 
     AndroidWebDemo_LoginPage androidWebDemoLoginPage;
     AndroidNativeDemo_FileApp androidNativeDemoFileApp;
@@ -20,7 +21,6 @@ public class MobilePageObjectManager {
     public AndroidDemo_MainPage getAndroidDemo_MainPage() {
         return (androidDemo_mainPage == null) ? androidDemo_mainPage = new AndroidDemo_MainPage(aDriver) : androidDemo_mainPage;
     }
-
 
     public AndroidWebDemo_LoginPage getAndroidWebDemo_LoginPage() {
         return (androidWebDemoLoginPage == null) ? androidWebDemoLoginPage = new AndroidWebDemo_LoginPage(aDriver) : androidWebDemoLoginPage;

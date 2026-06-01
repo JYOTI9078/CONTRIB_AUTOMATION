@@ -7,6 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PageClass extends WebUtils {
 
+    public static SelfHealingDriver driver;
+
     public PageClass(SelfHealingDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);

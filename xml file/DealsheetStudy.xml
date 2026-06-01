@@ -1,0 +1,41 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:v1="http://xmldefs.bcpraha.com/Customer/Psa/Ppas4Pms/v1"
+               xmlns:ws="http://xmldefs.bcpraha.com/Common/Ws/v1"
+               xmlns:pp="http://xmldefs.bcpraha.com/Customer/Psa/Pms/ProtocolProfitability/v1"
+               xmlns:wss="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+  <soap:Header>
+    <wss:Security>
+      <wss:UsernameToken>
+        <wss:Username>mwpfts01</wss:Username>
+      </wss:UsernameToken>
+      <wss:Password>fts01ind</wss:Password>
+    </wss:Security>
+  </soap:Header>
+  <soap:Body>
+    <v1:pamGetProfitabilityStudyDealSheetData>
+      <v1:input>
+        <ws:clientRequestContext>
+          <ws:systemId>Fts:TDU5R97P02QMPS0</ws:systemId>
+          <ws:brandId>AC</ws:brandId>
+          <ws:mandantId>TEST</ws:mandantId>
+          <ws:countryId>BE</ws:countryId>
+          <ws:marketId>IT</ws:marketId>
+          <ws:organizationId>TEST</ws:organizationId>
+          <ws:userId kind="INETPSA">SD51978</ws:userId>
+          <ws:contextToken>TEST</ws:contextToken>
+          <ws:authorizationToken>TEST</ws:authorizationToken>
+          <ws:soapMessageUid>0abedf21-68c8-4ea0-a1c9-99071d90e51e</ws:soapMessageUid>
+          <ws:requestClientTimestamp>2024-09-27T16:18:18.554+02:00</ws:requestClientTimestamp>
+        </ws:clientRequestContext>
+        <pp:countryCode>BE</pp:countryCode>
+        <pp:brandCode>AP</pp:brandCode>
+        <pp:studyDealSheetDataList>
+          <pp:identification>
+            <pp:protocolId pmsKind="FLEETSALES">P-PES-2410-00472</pp:protocolId>
+            <pp:studyId ppasKind="CONTRIB">BEGCAR0001</pp:studyId>
+          </pp:identification>
+        </pp:studyDealSheetDataList>
+      </v1:input>
+    </v1:pamGetProfitabilityStudyDealSheetData>
+  </soap:Body>
+</soap:Envelope>

@@ -1,12 +1,10 @@
 package com.sogeti.automation.framework.driver;
 
-import com.epam.healenium.SelfHealingDriver;
-import com.sogeti.automation.framework.constants.AppConstants;
-import com.sogeti.automation.framework.constants.FrameworkConstants;
-import com.sogeti.automation.framework.utils.Logging;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import java.net.URL;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
@@ -26,10 +24,14 @@ import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.events.WebDriverListener;
 
-import java.net.URL;
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
+import com.epam.healenium.SelfHealingDriver;
+import com.sogeti.automation.framework.constants.AppConstants;
+import com.sogeti.automation.framework.constants.FrameworkConstants;
+import com.sogeti.automation.framework.utils.Logging;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class GlobalDriver {
 
@@ -37,7 +39,7 @@ public class GlobalDriver {
     private String defaultDownloadPath = null;
 
     public GlobalDriver() {
-        //    private String browserName;
+        // private String browserName;
         String _headless = System.getProperty("headlessMode");
         if (_headless.equalsIgnoreCase("true"))
             log.info("Running tests in headless mode.");
@@ -68,34 +70,31 @@ public class GlobalDriver {
         capabilities.setCapability("udid", AppConstants.Android.ANDROID_UDID);
         capabilities.setCapability("orientation", AppConstants.Android.ANDROID_ORIENTATION);
 
-        if(AppConstants.MOBILEEXECUTIONTYPE.equalsIgnoreCase("App"))
-        {capabilities.setCapability("app", System.getProperty("user.dir") +AppConstants.Android.ANDROID_APP);
-        }
-        else if (AppConstants.MOBILEEXECUTIONTYPE.equalsIgnoreCase("Native")) {
+        if (AppConstants.MOBILEEXECUTIONTYPE.equalsIgnoreCase("App")) {
+            capabilities.setCapability("app", System.getProperty("user.dir") + AppConstants.Android.ANDROID_APP);
+        } else if (AppConstants.MOBILEEXECUTIONTYPE.equalsIgnoreCase("Native")) {
             capabilities.setCapability("appPackage", AppConstants.Android.ANDROID_APP_PACKAGE);
             capabilities.setCapability("appActivity", AppConstants.Android.ANDROID_APP_ACTIVITY);
-        }
-        else {
+        } else {
             capabilities.setCapability("browserName", AppConstants.Android.ANDROID_BROWSERNAME);
             switch (AppConstants.Android.ANDROID_BROWSERNAME.toLowerCase()) {
-                case "chrome":
-                    WebDriverManager.chromedriver().clearResolutionCache().setup();
-                    break;
+            case "chrome":
+                WebDriverManager.chromedriver().clearResolutionCache().setup();
+                break;
 
-                case "firefox":
-                    WebDriverManager.firefoxdriver().clearResolutionCache().setup();
-                    break;
+            case "firefox":
+                WebDriverManager.firefoxdriver().clearResolutionCache().setup();
+                break;
 
-                case "edge":
-                    WebDriverManager.edgedriver().clearResolutionCache().setup();
-                    break;
+            case "edge":
+                WebDriverManager.edgedriver().clearResolutionCache().setup();
+                break;
 
-                case "safari":
-                    WebDriverManager.safaridriver().clearResolutionCache().setup();
-                    break;
+            case "safari":
+                WebDriverManager.safaridriver().clearResolutionCache().setup();
+                break;
             }
         }
-
 
         delegate = new AndroidDriver(new URL(urlValue), capabilities);
         _sDriver = SelfHealingDriver.create(delegate);
@@ -122,66 +121,57 @@ public class GlobalDriver {
         ThreadContext.push(browserName.toUpperCase());
 
         switch (browserName.toLowerCase()) {
-            case "chrome":
-                WebDriverManager.chromedriver().clearResolutionCache().setup();
-                if (executionServer.equalsIgnoreCase("remote")) {
-                    try {
-                            delegate = new RemoteWebDriver(new URL(AppConstants.Web.GRID_HUB_URL), setChromeOptions());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }else {
-                    delegate = new ChromeDriver(setChromeOptions());
-
+        case "chrome":
+            WebDriverManager.chromedriver().clearResolutionCache().setup();
+            if (executionServer.equalsIgnoreCase("remote")) {
+                try {
+                    delegate = new RemoteWebDriver(new URL(AppConstants.Web.GRID_HUB_URL), setChromeOptions());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                break;
+            } else {
+                delegate = new ChromeDriver(setChromeOptions());
 
-            case "firefox":
-                WebDriverManager.firefoxdriver().clearResolutionCache().setup();
+            }
+            break;
 
-                if (executionServer.equalsIgnoreCase("remote")) {
-                    Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
+        case "firefox":
+            WebDriverManager.firefoxdriver().clearResolutionCache().setup();
 
-                    delegate = WebDriverManager.firefoxdriver()
-                            .capabilities(setFirefoxOptions())
-                            .remoteAddress(AppConstants.Web.GRID_HUB_URL)
-                            .create();
-                } else {
-                    delegate = new FirefoxDriver(setFirefoxOptions());
-                }
-                break;
+            if (executionServer.equalsIgnoreCase("remote")) {
+                Main.main(new String[] { "standalone", "--port", AppConstants.Web.GRIP_HUB_PORT });
 
-            case "edge":
-                WebDriverManager.edgedriver().clearResolutionCache().setup();
+                delegate = WebDriverManager.firefoxdriver().capabilities(setFirefoxOptions()).remoteAddress(AppConstants.Web.GRID_HUB_URL).create();
+            } else {
+                delegate = new FirefoxDriver(setFirefoxOptions());
+            }
+            break;
 
-                if (executionServer.equalsIgnoreCase("remote")) {
-                    Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
+        case "edge":
+            // WebDriverManager.edgedriver().clearResolutionCache().setup();
 
-                    delegate = WebDriverManager.edgedriver()
-                            .capabilities(setEdgeOptions())
-                            .remoteAddress(AppConstants.Web.GRID_HUB_URL)
-                            .create();
-                } else {
-                    delegate = new EdgeDriver(setEdgeOptions());
-                }
-                break;
+            if (executionServer.equalsIgnoreCase("remote")) {
+                Main.main(new String[] { "standalone", "--port", AppConstants.Web.GRIP_HUB_PORT });
 
-            case "safari":
-                WebDriverManager.safaridriver().clearResolutionCache().setup();
+                delegate = WebDriverManager.edgedriver().capabilities(setEdgeOptions()).remoteAddress(AppConstants.Web.GRID_HUB_URL).create();
+            } else {
+                delegate = new EdgeDriver(setEdgeOptions());
+            }
+            break;
 
-                if (executionServer.equalsIgnoreCase("remote")) {
-                    Main.main(new String[]{"standalone", "--port", AppConstants.Web.GRIP_HUB_PORT});
+        case "safari":
+            WebDriverManager.safaridriver().clearResolutionCache().setup();
 
-                    delegate = WebDriverManager.safaridriver()
-                            .capabilities(setSafariOptions())
-                            .remoteAddress(AppConstants.Web.GRID_HUB_URL)
-                            .create();
-                } else {
-                    delegate = new SafariDriver(setSafariOptions());
-                }
-                break;
+            if (executionServer.equalsIgnoreCase("remote")) {
+                Main.main(new String[] { "standalone", "--port", AppConstants.Web.GRIP_HUB_PORT });
+
+                delegate = WebDriverManager.safaridriver().capabilities(setSafariOptions()).remoteAddress(AppConstants.Web.GRID_HUB_URL).create();
+            } else {
+                delegate = new SafariDriver(setSafariOptions());
+            }
+            break;
         }
-        _sDriver = SelfHealingDriver.create(delegate) ;
+        _sDriver = SelfHealingDriver.create(delegate);
         _sDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(FrameworkConstants.SMALL_WAIT));
         _sDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(FrameworkConstants.LARGE_WAIT));
         _sDriver.manage().window().maximize();
@@ -194,20 +184,56 @@ public class GlobalDriver {
         };
         WebDriver driver = new EventFiringDecorator(listener).decorate(_sDriver);
 
-
         log.info("New driver instantiated.");
 
         return _sDriver;
     }
 
+    /*
+     * private ChromeOptions setChromeOptions() { ChromeOptions options = new ChromeOptions();
+     * 
+     * 
+     * Map<String, Object> prefs = new HashMap<>(); prefs.put("download.default_directory", defaultDownloadPath); // adding download folder preference
+     * prefs.put("download.prompt_for_download", "false"); // preferences for download notification
+     * prefs.put("profile.default_content_settings.popups", 0); // preferences for pop-ups prefs.put("settings.language.preferred_languages", "en");
+     * // language preferences
+     * 
+     * options.setExperimentalOption("prefs", prefs); options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+     * options.addArguments("--disable-notifications"); options.addArguments("--test-type"); options.addArguments("ignore-certificate-errors");
+     * options.addArguments("--disable-extensions"); options.addArguments("start-maximized"); options.addArguments("--remote-allow-origins=*");
+     * options.addArguments("--use-fake-ui-for-media-stream=1"); return options; }
+     */
+//    private ChromeOptions setChromeOptions() {
+//        ChromeOptions options = new ChromeOptions();
+//        System.setProperty("webdriver.chrome.driver", "C:\\Users\\SG02410\\LITMUS01 (2)\\LITMUS01\\driver\\chromedriver.exe");
+//
+//        Map<String, Object> prefs = new HashMap<>();
+//        prefs.put("download.default_directory", defaultDownloadPath); // adding download folder preference
+//        prefs.put("download.prompt_for_download", "false"); // preferences for download notification
+//        prefs.put("profile.default_content_settings.popups", 0); // preferences for pop-ups
+//        prefs.put("settings.language.preferred_languages", "en"); // language preferences
+//
+//        options.setExperimentalOption("prefs", prefs);
+//        options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+//        options.addArguments("--disable-notifications");
+//        options.addArguments("--test-type");
+//        options.addArguments("ignore-certificate-errors");
+//        options.addArguments("--disable-extensions");
+//        options.addArguments("start-maximized");
+//        options.addArguments("--use-fake-ui-for-media-stream=1");
+//        // options.addArguments("--headless");
+//
+//        return options;
+//    }
     private ChromeOptions setChromeOptions() {
         ChromeOptions options = new ChromeOptions();
+        System.setProperty("webdriver.chrome.driver", "P:\\Apr23\\LITMUS01\\LITMUS01\\driver\\chromedriver.exe");
 
         Map<String, Object> prefs = new HashMap<>();
-        prefs.put("download.default_directory", defaultDownloadPath);  //adding download folder preference
-        prefs.put("download.prompt_for_download", "false");  //preferences for download notification
-        prefs.put("profile.default_content_settings.popups", 0);  //preferences for pop-ups
-        prefs.put("settings.language.preferred_languages", "en");  //language preferences
+        prefs.put("download.default_directory", defaultDownloadPath);
+        prefs.put("download.prompt_for_download", "false");
+        prefs.put("profile.default_content_settings.popups", 0);
+        prefs.put("settings.language.preferred_languages", "en");
 
         options.setExperimentalOption("prefs", prefs);
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
@@ -216,8 +242,14 @@ public class GlobalDriver {
         options.addArguments("ignore-certificate-errors");
         options.addArguments("--disable-extensions");
         options.addArguments("start-maximized");
-        options.addArguments("--remote-allow-origins=*");
         options.addArguments("--use-fake-ui-for-media-stream=1");
+        // options.addArguments("--headless");
+
+        // Add persistent profile for session reuse
+        // MFA Authenticator
+        String userDataDir = "C:/Users/TA40167/selenium-profiles";
+        options.addArguments("--user-data-dir=" + userDataDir);
+
         return options;
     }
 
@@ -241,14 +273,34 @@ public class GlobalDriver {
         return options;
     }
 
+    // private EdgeOptions setEdgeOptions() {
+//        EdgeOptions options = new EdgeOptions();
+//
+//        Map<String, Object> prefs = new HashMap<>();
+//        prefs.put("download.default_directory", defaultDownloadPath);  //adding download folder preference
+//        prefs.put("download.prompt_for_download", "false");  //preferences for download notification
+//        prefs.put("profile.default_content_settings.popups", 0);  //preferences for pop-ups
+//        prefs.put("settings.language.preferred_languages", "en");  //language preferences
+//
+//        options.setExperimentalOption("prefs", prefs);
+//        options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+//        options.addArguments("--disable-notifications");
+//        options.addArguments("--test-type");
+//        options.addArguments("ignore-certificate-errors");
+//        options.addArguments("--disable-extensions");
+//        options.addArguments("start-maximized");
+//        options.addArguments("--use-fake-ui-for-media-stream=1");
+//        return options;
+    // }
     private EdgeOptions setEdgeOptions() {
         EdgeOptions options = new EdgeOptions();
+        System.setProperty("webdriver.edge.driver", "P:\\Apr23\\LITMUS01\\LITMUS01\\driver\\msedgedriver.exe");
 
         Map<String, Object> prefs = new HashMap<>();
-        prefs.put("download.default_directory", defaultDownloadPath);  //adding download folder preference
-        prefs.put("download.prompt_for_download", "false");  //preferences for download notification
-        prefs.put("profile.default_content_settings.popups", 0);  //preferences for pop-ups
-        prefs.put("settings.language.preferred_languages", "en");  //language preferences
+        prefs.put("download.default_directory", defaultDownloadPath); // adding download folder preference
+        prefs.put("download.prompt_for_download", "false"); // preferences for download notification
+        prefs.put("profile.default_content_settings.popups", 0); // preferences for pop-ups
+        prefs.put("settings.language.preferred_languages", "en"); // language preferences
 
         options.setExperimentalOption("prefs", prefs);
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
@@ -258,16 +310,18 @@ public class GlobalDriver {
         options.addArguments("--disable-extensions");
         options.addArguments("start-maximized");
         options.addArguments("--use-fake-ui-for-media-stream=1");
+        // options.addArguments("--headless");
+
         return options;
     }
 
     private SafariOptions setSafariOptions() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         Map<String, Object> prefs = new HashMap<>();
-        prefs.put("download.default_directory", defaultDownloadPath);  //adding download folder preference
-        prefs.put("download.prompt_for_download", "false");  //preferences for download notification
-        prefs.put("profile.default_content_settings.popups", 0);  //preferences for pop-ups
-        prefs.put("settings.language.preferred_languages", "en");  //language preferences
+        prefs.put("download.default_directory", defaultDownloadPath); // adding download folder preference
+        prefs.put("download.prompt_for_download", "false"); // preferences for download notification
+        prefs.put("profile.default_content_settings.popups", 0); // preferences for pop-ups
+        prefs.put("settings.language.preferred_languages", "en"); // language preferences
 
         SafariOptions options = new SafariOptions();
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
